@@ -98,7 +98,7 @@ const Editor = () => {
           <option value="1">トップス：1</option>
           <option value="2">ボトムス：2</option>
           <option value="3">ワンピース、セットアップ：3</option>
-          <option value="r">アクセサリー：4</option>
+          <option value="4">アクセサリー：4</option>
           <option value="5">シューズ：5</option>
           <option value="6">アウター：6</option>
         </Form.Select>
