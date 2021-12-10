@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 
+import { I18n } from "aws-amplify";
 import {
   AmplifySignIn,
   AmplifySignOut,
@@ -12,6 +13,19 @@ import { AuthState, onAuthUIStateChange } from "@aws-amplify/ui-components";
 
 import Editor from "./components/Editor";
 import Preview from "./components/Preview";
+
+const dict = {
+  ja: {
+    "Forgot your password?": "パスワードを忘れた場合",
+    "Reset password": "パスワードをリセット",
+    "No account?": "アカウントを持っていない場合",
+    "Create account": "サインアップ",
+    "Sign Out": "サインアウト",
+  },
+};
+
+I18n.putVocabularies(dict);
+I18n.setLanguage("ja");
 
 export const SkuContext = createContext();
 
@@ -47,7 +61,24 @@ function App() {
     </div>
   ) : (
     <AmplifyAuthenticator>
-      <AmplifySignIn slot="sign-in" hideSignUp={true} />
+      <AmplifySignIn
+        slot="sign-in"
+        hideSignUp={true}
+        headerText="アカウントにサインインする"
+        submitButtonText="サインイン"
+        formFields={[
+          {
+            type: "username",
+            label: "ユーザー名",
+            placeholder: "ユーザー名を入力してください",
+          },
+          {
+            type: "password",
+            label: "パスワード",
+            placeholder: "パスワードを入力してください",
+          },
+        ]}
+      />
     </AmplifyAuthenticator>
   );
 }
