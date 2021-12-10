@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 import logo from "./logo.svg";
-import { Dropdown, Form, FloatingLabel, Col, Row } from "react-bootstrap";
+import { Form, FloatingLabel, Col, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 
@@ -11,28 +11,89 @@ import {
 } from "@aws-amplify/ui-react";
 import { AuthState, onAuthUIStateChange } from "@aws-amplify/ui-components";
 
+const SkuContext = createContext();
+
 const Editor = () => {
+  const { sku, setSku } = useContext(SkuContext);
+
+  const [brandCode, setBrandCode] = useState("01");
+  const [years, setYears] = useState("21");
+  const [season, setSeason] = useState("x");
+  const [largeCategory, setLargeCategory] = useState("x");
+  const [mediumCategory, setMediumCategory] = useState("xx");
+  const [smallCategory, setSmallCategory] = useState("xx");
+  // -
+  const [colorNumber, setColorNumber] = useState("xxx");
+
+  useEffect(() => {
+    let newSku =
+      brandCode +
+      years +
+      season +
+      largeCategory +
+      mediumCategory +
+      smallCategory +
+      "-" +
+      colorNumber;
+    setSku(newSku);
+  }, [
+    setSku,
+    brandCode,
+    years,
+    season,
+    largeCategory,
+    mediumCategory,
+    smallCategory,
+    colorNumber,
+  ]);
+
   return (
     <div className="App-editor">
       <Form.Group as={Col} md="1" controlId="validationCustom01">
         <Form.Label>ブランドコード</Form.Label>
-        <Form.Control required type="text" placeholder="01" defaultValue="01" />
+        <Form.Control
+          required
+          type="text"
+          placeholder="01"
+          defaultValue="01"
+          onChange={(e) => {
+            setBrandCode(e.target.value);
+          }}
+        />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
       </Form.Group>
       <Form.Group as={Col} md="1" controlId="validationCustom01">
         <Form.Label>年数</Form.Label>
-        <Form.Control required type="text" placeholder="21" defaultValue="21" />
+        <Form.Control
+          required
+          type="text"
+          placeholder="21"
+          defaultValue="21"
+          onChange={(e) => {
+            setYears(e.target.value);
+          }}
+        />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
       </Form.Group>
       <FloatingLabel controlId="floatingSelect" label="シーズン">
-        <Form.Select aria-label="Floating label select example">
+        <Form.Select
+          aria-label="Floating label select example"
+          onChange={(e) => {
+            setSeason(e.target.value);
+          }}
+        >
           <option>選択</option>
           <option value="1">SS : 1</option>
           <option value="3">AW : 3</option>
         </Form.Select>
       </FloatingLabel>
       <FloatingLabel controlId="floatingSelect" label="大カテゴリ">
-        <Form.Select aria-label="Floating label select example">
+        <Form.Select
+          aria-label="Floating label select example"
+          onChange={(e) => {
+            setLargeCategory(e.target.value);
+          }}
+        >
           <option>選択</option>
           <option value="1">トップス：1</option>
           <option value="2">ボトムス：2</option>
@@ -43,7 +104,12 @@ const Editor = () => {
         </Form.Select>
       </FloatingLabel>
       <FloatingLabel controlId="floatingSelect" label="中カテゴリ">
-        <Form.Select aria-label="Floating label select example">
+        <Form.Select
+          aria-label="Floating label select example"
+          onChange={(e) => {
+            setMediumCategory(e.target.value);
+          }}
+        >
           <option>選択</option>
           <option>◆トップス◆</option>
           <option value="11">Tシャツ：11</option>
@@ -77,11 +143,24 @@ const Editor = () => {
       </FloatingLabel>
       <Form.Group as={Col} md="1" controlId="validationCustom01">
         <Form.Label>小カテゴリ - サイズ</Form.Label>
-        <Form.Control required type="text" placeholder="00" defaultValue="xx" />
+        <Form.Control
+          required
+          type="text"
+          placeholder="00"
+          defaultValue="xx"
+          onChange={(e) => {
+            setSmallCategory(e.target.value);
+          }}
+        />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
       </Form.Group>
       <FloatingLabel controlId="floatingSelect" label="カラー番号">
-        <Form.Select aria-label="Floating label select example">
+        <Form.Select
+          aria-label="Floating label select example"
+          onChange={(e) => {
+            setColorNumber(e.target.value);
+          }}
+        >
           <option>選択</option>
           <option value="100">WHT：100</option>
           <option value="001">BLK ：001</option>
@@ -106,7 +185,7 @@ const Editor = () => {
   );
 };
 
-const Preview = () => {
+const Preview = ({ sku }) => {
   return (
     <div className="App-preview">
       <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
@@ -114,7 +193,7 @@ const Preview = () => {
           SKU
         </Form.Label>
         <Col sm="10">
-          <Form.Control type="text" readOnly defaultValue="000000000-000" />
+          <Form.Control type="text" readOnly value={sku} />
         </Col>
       </Form.Group>
     </div>
@@ -124,6 +203,12 @@ const Preview = () => {
 function App() {
   const [authState, setAuthState] = useState();
   const [user, setUser] = useState();
+
+  const [sku, setSku] = useState("000000000-000");
+  const value = {
+    sku,
+    setSku,
+  };
 
   useEffect(() => {
     return onAuthUIStateChange((nextAuthState, authData) => {
@@ -139,8 +224,10 @@ function App() {
         <AmplifySignOut className="btn" />
       </header>
       <main>
-        <Editor />
-        <Preview />
+        <SkuContext.Provider value={value}>
+          <Editor />
+        </SkuContext.Provider>
+        <Preview sku={sku} />
       </main>
     </div>
   ) : (
