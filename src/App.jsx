@@ -52,11 +52,9 @@ function App() {
         <AmplifySignOut className="btn" />
       </header>
       <main>
-        <hr />
         <SkuContext.Provider value={value}>
           <Editor />
         </SkuContext.Provider>
-        <hr />
         <SkuTable />
       </main>
     </div>
