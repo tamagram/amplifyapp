@@ -126,9 +126,10 @@ const SkuTable = () => {
       },
     })
       .then((apiData) => {
-        setProducts(apiData.data.listProducts.items);
+        const gotProducts = apiData.data.listProducts.items;
+        setProducts(gotProducts);
         setDbConnected(true);
-        setDbMessage("データベースに接続しました。");
+        setDbMessage(gotProducts.length + "件のデータを検索しました。");
       })
       .catch((error) => {
         setDbConnected(false);
@@ -137,21 +138,25 @@ const SkuTable = () => {
       });
   };
 
-  const productsLi = products.map((product) => (
-    <tr key={product.sku}>
-      <td>{product.name}</td>
-      <td>{product.price || "未設定"}</td>
-      <td>{product.size || "未設定"}</td>
-      <td>{product.brandCode}</td>
-      <td>{product.year}</td>
-      <td>{product.season}</td>
-      <td>{product.largeCategory}</td>
-      <td>{product.mediumCategory}</td>
-      <td>{product.smallCategory}</td>
-      <td>{product.color}</td>
-      <td>{product.sku}</td>
-    </tr>
-  ));
+  const productsLi = products.length ? (
+    products.map((product) => (
+      <tr key={product.sku}>
+        <td>{product.name}</td>
+        <td>{product.price || "未設定"}</td>
+        <td>{product.size || "未設定"}</td>
+        <td>{product.brandCode}</td>
+        <td>{product.year}</td>
+        <td>{product.season}</td>
+        <td>{product.largeCategory}</td>
+        <td>{product.mediumCategory}</td>
+        <td>{product.smallCategory}</td>
+        <td>{product.color}</td>
+        <td>{product.sku}</td>
+      </tr>
+    ))
+  ) : (
+    <Alert variant="danger">データがありません。</Alert>
+  );
 
   return (
     <>
