@@ -63,6 +63,10 @@ const Editor = () => {
       alert("商品名が未入力です。");
       return;
     }
+    if (price === "") {
+      alert("価格が未入力です。");
+      return;
+    }
     const gotProducts = await API.graphql({
       query: listProductsQuery,
       variables: {
@@ -115,7 +119,7 @@ const Editor = () => {
                   <Col>
                     <Form.Control
                       required
-                      type="text"
+                      type="number"
                       placeholder="01"
                       defaultValue="01"
                       onChange={(e) => {
@@ -216,7 +220,6 @@ const Editor = () => {
                     <Form.Control
                       required
                       type="text"
-                      placeholder="00"
                       defaultValue="xx"
                       onChange={(e) => {
                         setSmallCategory(e.target.value);
@@ -256,30 +259,52 @@ const Editor = () => {
             </Card>
           </Col>
           <Col>
-            <div class={styles.preview}>
+            <Stack gap={2} className="m-3">
               <Form.Group as={Row} controlId="validationCustom01">
-                <Form.Label>商品名</Form.Label>
-                <Form.Control
-                  required
-                  type="text"
-                  placeholder="no name"
-                  value={name}
-                  onChange={(e) => {
-                    setName(e.target.value);
-                  }}
-                />
+                <Form.Label column sm="5">
+                  商品名
+                </Form.Label>
+                <Col>
+                  <Form.Control
+                    required
+                    type="text"
+                    value={name}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                  />
+                </Col>
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Row} controlId="validationCustom01">
+                <Form.Label column sm="5">
+                  価格
+                </Form.Label>
+                <Col>
+                  <Form.Control
+                    required
+                    type="number"
+                    value={price}
+                    onChange={(e) => {
+                      setPrice(e.target.value);
+                    }}
+                  />
+                </Col>
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
               <Form.Group as={Row} controlId="formPlaintextEmail">
-                <Form.Label row>SKU</Form.Label>
+                <Form.Label column sm="5">
+                  SKU
+                </Form.Label>
                 <Col>
                   <Form.Control type="text" readOnly value={sku} />
                 </Col>
               </Form.Group>
+
               <Button variant="primary" onClick={createProduct}>
                 リストに追加
               </Button>
-            </div>
+            </Stack>
           </Col>
         </Row>
       </Container>
