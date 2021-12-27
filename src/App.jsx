@@ -12,7 +12,7 @@ import {
 import { AuthState, onAuthUIStateChange } from "@aws-amplify/ui-components";
 
 import Editor from "./components/Editor";
-import Preview from "./components/Preview";
+import SkuTable from "./components/SkuTable";
 
 const dict = {
   ja: {
@@ -38,7 +38,6 @@ function App() {
     sku,
     setSku,
   };
-
   useEffect(() => {
     return onAuthUIStateChange((nextAuthState, authData) => {
       setAuthState(nextAuthState);
@@ -53,10 +52,12 @@ function App() {
         <AmplifySignOut className="btn" />
       </header>
       <main>
+        <hr />
         <SkuContext.Provider value={value}>
           <Editor />
         </SkuContext.Provider>
-        <Preview sku={sku} />
+        <hr />
+        <SkuTable />
       </main>
     </div>
   ) : (
