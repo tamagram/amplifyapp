@@ -4,16 +4,23 @@
 export const getProduct = /* GraphQL */ `
   query GetProduct($id: ID!) {
     getProduct(id: $id) {
-      sku
+      id
       name
       price
-      id
+      size
+      brandCode
+      year
+      season
+      largeCategory
+      mediumCategory
+      smallCategory
+      color
+      sku
       createdAt
       updatedAt
     }
   }
 `;
-
 export const listProducts = /* GraphQL */ `
   query ListProducts(
     $filter: ModelProductFilterInput
@@ -22,10 +29,18 @@ export const listProducts = /* GraphQL */ `
   ) {
     listProducts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        sku
+        id
         name
         price
-        id
+        size
+        brandCode
+        year
+        season
+        largeCategory
+        mediumCategory
+        smallCategory
+        color
+        sku
         createdAt
         updatedAt
       }

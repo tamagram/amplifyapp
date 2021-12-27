@@ -7,10 +7,18 @@ export const createProduct = /* GraphQL */ `
     $condition: ModelProductConditionInput
   ) {
     createProduct(input: $input, condition: $condition) {
-      sku
+      id
       name
       price
-      id
+      size
+      brandCode
+      year
+      season
+      largeCategory
+      mediumCategory
+      smallCategory
+      color
+      sku
       createdAt
       updatedAt
     }
@@ -22,10 +30,18 @@ export const updateProduct = /* GraphQL */ `
     $condition: ModelProductConditionInput
   ) {
     updateProduct(input: $input, condition: $condition) {
-      sku
+      id
       name
       price
-      id
+      size
+      brandCode
+      year
+      season
+      largeCategory
+      mediumCategory
+      smallCategory
+      color
+      sku
       createdAt
       updatedAt
     }
@@ -37,10 +53,18 @@ export const deleteProduct = /* GraphQL */ `
     $condition: ModelProductConditionInput
   ) {
     deleteProduct(input: $input, condition: $condition) {
-      sku
+      id
       name
       price
-      id
+      size
+      brandCode
+      year
+      season
+      largeCategory
+      mediumCategory
+      smallCategory
+      color
+      sku
       createdAt
       updatedAt
     }

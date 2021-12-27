@@ -3,7 +3,16 @@ input AMPLIFY {
 }
 
 type Product @model {
-  sku: ID!
+  id: ID!
   name: String!
   price: Int
+  size: String
+  brandCode: String!
+  year: String!
+  season: String!
+  largeCategory: String!
+  mediumCategory: String!
+  smallCategory: String!
+  color: String!
+  sku: String!
 }
