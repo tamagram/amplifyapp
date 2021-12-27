@@ -12,7 +12,7 @@ import {
 } from "react-bootstrap";
 import { useState, useEffect, useContext } from "react";
 import { API } from "aws-amplify";
-import { listProducts } from "../graphql/queries";
+import { listProducts as listProductsQuery } from "../graphql/queries";
 import styles from "./SkuTable.module.css";
 
 const SkuTable = () => {
@@ -29,7 +29,7 @@ const SkuTable = () => {
   }, []);
 
   const fetchProducts = async () => {
-    API.graphql({ query: listProducts })
+    API.graphql({ query: listProductsQuery })
       .then((apiData) => {
         setProducts(apiData.data.listProducts.items);
         setDbConnected(true);
@@ -42,6 +42,29 @@ const SkuTable = () => {
 
     // setProducts(apiData.data.listProducts.items);
     // console.log(apiData.data.listProducts.items);
+  };
+
+  const searchProducts = async () => {
+    API.graphql({
+      query: listProductsQuery,
+      variables: {
+        filter: {
+          name: {
+            contains: name,
+          },
+        },
+      },
+    })
+      .then((apiData) => {
+        setProducts(apiData.data.listProducts.items);
+        setDbConnected(true);
+        setDbMessage("データベースに接続しました。");
+      })
+      .catch((error) => {
+        setDbConnected(false);
+        setDbMessage("データベースに接続できませんでした。");
+        console.log(error);
+      });
   };
 
   const productsLi = products.map((product) => (
@@ -136,6 +159,9 @@ const SkuTable = () => {
                     <option value="64">アウター その他 : 64</option>
                   </Form.Select>
                 </FloatingLabel>
+                <Button variant="primary" onClick={searchProducts}>
+                  検索
+                </Button>
               </Stack>
             </Card>
           </Col>
