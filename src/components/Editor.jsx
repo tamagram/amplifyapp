@@ -119,7 +119,7 @@ const Editor = () => {
                   <Col>
                     <Form.Control
                       required
-                      type="number"
+                      type="string"
                       placeholder="01"
                       defaultValue="01"
                       onChange={(e) => {
