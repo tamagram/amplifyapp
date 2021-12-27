@@ -15,7 +15,6 @@ import {
   Container,
   Stack,
 } from "react-bootstrap";
-import styles from "./Editor.module.css";
 import { SkuContext } from "../App";
 
 const Editor = () => {
@@ -23,6 +22,7 @@ const Editor = () => {
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
+  const [size, setSize] = useState("");
 
   const [brandCode, setBrandCode] = useState("01");
   const [years, setYears] = useState("21");
@@ -59,12 +59,21 @@ const Editor = () => {
     if (sku.length !== 14 || sku.match(/(x|選択)/)) {
       alert("SKUが正しくありません。");
       return;
-    } else if (!name) {
+    }
+    if (!name) {
       alert("商品名が未入力です。");
       return;
     }
     if (price === "") {
       alert("価格が未入力です。");
+      return;
+    }
+    if (size === "") {
+      alert("サイズが未入力です。");
+      return;
+    }
+    if (!size.match(/[A-Z]/)) {
+      alert("サイズが正しくありません。");
       return;
     }
     const gotProducts = await API.graphql({
@@ -81,19 +90,24 @@ const Editor = () => {
       alert("すでに存在するSKUです。");
       return;
     }
-    console.dir({
+    const newProduct = {
       name: name,
       price: price,
+      size: size,
+      brandCode: brandCode,
+      year: years,
+      season: season,
+      largeCategory: largeCategory,
+      mediumCategory: mediumCategory,
+      smallCategory: smallCategory,
+      color: colorNumber,
       sku: sku,
-    });
+    };
+    console.dir(newProduct);
     API.graphql({
       query: createProductMutation,
       variables: {
-        input: {
-          sku: sku,
-          name: name,
-          price: price,
-        },
+        input: newProduct,
       },
     })
       .then(() => {
@@ -287,6 +301,22 @@ const Editor = () => {
                     value={price}
                     onChange={(e) => {
                       setPrice(e.target.value);
+                    }}
+                  />
+                </Col>
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Row} controlId="validationCustom01">
+                <Form.Label column sm="5">
+                  サイズ
+                </Form.Label>
+                <Col>
+                  <Form.Control
+                    required
+                    type="text"
+                    value={size}
+                    onChange={(e) => {
+                      setSize(e.target.value);
                     }}
                   />
                 </Col>
