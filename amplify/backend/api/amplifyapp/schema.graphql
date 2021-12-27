@@ -1,0 +1,9 @@
+input AMPLIFY {
+  globalAuthRule: AuthRule = { allow: public }
+}
+
+type Product @model {
+  sku: ID!
+  name: String!
+  price: Int
+}
