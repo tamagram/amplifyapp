@@ -15,6 +15,7 @@ import {
   Container,
   Stack,
   Modal,
+  Alert,
 } from "react-bootstrap";
 import { SkuContext } from "../App";
 
@@ -34,6 +35,10 @@ const Editor = () => {
   const [smallCategory, setSmallCategory] = useState("xx");
   // -
   const [colorCode, setColorCode] = useState("xxx");
+
+  const [smallCategoryMessage, setSmallCategoryMessage] = useState(
+    "ブランドコード、年数、シーズン、大カテゴリ、中カテゴリ、カラー番号が埋まっているときに下のボタンを押すと、自動的に小カテゴリに候補が表示されます。"
+  );
 
   useEffect(() => {
     let newSku =
@@ -120,6 +125,47 @@ const Editor = () => {
       });
   };
 
+  const asignSmallCategory = async () => {
+    const gotProducts = await API.graphql({
+      query: listProductsQuery,
+      variables: {
+        filter: {
+          brandCode: {
+            eq: brandCode,
+          },
+          year: {
+            eq: years,
+          },
+          season: {
+            eq: season,
+          },
+          largeCategory: {
+            eq: largeCategory,
+          },
+          mediumCategory: {
+            eq: mediumCategory,
+          },
+          color: {
+            eq: colorCode,
+          },
+        },
+      },
+    });
+    if (gotProducts.data.listProducts.items.length === 0) {
+      setSmallCategoryMessage(
+        "ほかのサイズが存在しないため、小カテゴリに01を設定しました。"
+      );
+      setSmallCategory("01");
+      return;
+    }
+    let smallCategories = gotProducts.data.listProducts.items.map(
+      (item) => item.smallCategory + "(" + item.size + ")"
+    );
+    let message = smallCategories.join(", ");
+    message += "がすでに存在しています。";
+    setSmallCategoryMessage(message);
+  };
+
   return (
     <>
       <Button size="lg" onClick={() => setShow(true)}>
@@ -129,7 +175,7 @@ const Editor = () => {
         <Container>
           <Row>
             <Col>
-              <Card>
+              <Card className="my-3">
                 <Stack gap={2} className="m-3">
                   <Form.Group as={Row} controlId="validationCustom01">
                     <Form.Label column sm="5">
@@ -342,6 +388,17 @@ const Editor = () => {
                 <Button variant="primary" onClick={createProduct}>
                   リストに追加
                 </Button>
+                <Alert variant="secondary">
+                  {smallCategoryMessage}
+                  <br />
+                  <Button
+                    className="m-1"
+                    variant="primary"
+                    onClick={asignSmallCategory}
+                  >
+                    小カテゴリ割り当て
+                  </Button>
+                </Alert>
               </Stack>
             </Col>
           </Row>
