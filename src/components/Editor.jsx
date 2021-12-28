@@ -33,7 +33,7 @@ const Editor = () => {
   const [mediumCategory, setMediumCategory] = useState("xx");
   const [smallCategory, setSmallCategory] = useState("xx");
   // -
-  const [colorNumber, setColorNumber] = useState("xxx");
+  const [colorCode, setColorCode] = useState("xxx");
 
   useEffect(() => {
     let newSku =
@@ -44,7 +44,7 @@ const Editor = () => {
       mediumCategory +
       smallCategory +
       "-" +
-      colorNumber;
+      colorCode;
     setSku(newSku);
   }, [
     setSku,
@@ -54,7 +54,7 @@ const Editor = () => {
     largeCategory,
     mediumCategory,
     smallCategory,
-    colorNumber,
+    colorCode,
   ]);
 
   const createProduct = async () => {
@@ -102,7 +102,7 @@ const Editor = () => {
       largeCategory: largeCategory,
       mediumCategory: mediumCategory,
       smallCategory: smallCategory,
-      color: colorNumber,
+      color: colorCode,
       sku: sku,
     };
     console.dir(newProduct);
@@ -139,8 +139,7 @@ const Editor = () => {
                       <Form.Control
                         required
                         type="string"
-                        placeholder="01"
-                        defaultValue="01"
+                        value={brandCode}
                         onChange={(e) => {
                           setBrandCode(e.target.value);
                         }}
@@ -156,8 +155,7 @@ const Editor = () => {
                       <Form.Control
                         required
                         type="text"
-                        placeholder="21"
-                        defaultValue="21"
+                        value={years}
                         onChange={(e) => {
                           setYears(e.target.value);
                         }}
@@ -168,6 +166,7 @@ const Editor = () => {
                   <FloatingLabel controlId="floatingSelect" label="シーズン">
                     <Form.Select
                       aria-label="Floating label select example"
+                      value={season}
                       onChange={(e) => {
                         setSeason(e.target.value);
                       }}
@@ -180,6 +179,7 @@ const Editor = () => {
                   <FloatingLabel controlId="floatingSelect" label="大カテゴリ">
                     <Form.Select
                       aria-label="Floating label select example"
+                      value={largeCategory}
                       onChange={(e) => {
                         setLargeCategory(e.target.value);
                       }}
@@ -196,6 +196,7 @@ const Editor = () => {
                   <FloatingLabel controlId="floatingSelect" label="中カテゴリ">
                     <Form.Select
                       aria-label="Floating label select example"
+                      value={mediumCategory}
                       onChange={(e) => {
                         setMediumCategory(e.target.value);
                       }}
@@ -239,6 +240,7 @@ const Editor = () => {
                       <Form.Control
                         required
                         type="text"
+                        value={smallCategory}
                         defaultValue="xx"
                         onChange={(e) => {
                           setSmallCategory(e.target.value);
@@ -250,8 +252,9 @@ const Editor = () => {
                   <FloatingLabel controlId="floatingSelect" label="カラー番号">
                     <Form.Select
                       aria-label="Floating label select example"
+                      value={colorCode}
                       onChange={(e) => {
-                        setColorNumber(e.target.value);
+                        setColorCode(e.target.value);
                       }}
                     >
                       <option>選択</option>

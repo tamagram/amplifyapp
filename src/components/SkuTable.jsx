@@ -33,7 +33,7 @@ const SkuTable = () => {
   const [mediumCategory, setMediumCategory] = useState("");
   const [smallCategory, setSmallCategory] = useState("");
   // -
-  const [colorNumber, setColorNumber] = useState("");
+  const [colorCode, setColorCode] = useState("");
 
   useEffect(() => {
     fetchProducts();
@@ -86,9 +86,9 @@ const SkuTable = () => {
         eq: smallCategory,
       };
     }
-    if (colorNumber) {
+    if (colorCode) {
       filter.color = {
-        eq: colorNumber,
+        eq: colorCode,
       };
     }
     setQueryFilter(filter);
@@ -103,7 +103,7 @@ const SkuTable = () => {
     largeCategory,
     mediumCategory,
     smallCategory,
-    colorNumber,
+    colorCode,
   ]);
 
   const fetchProducts = async () => {
@@ -177,6 +177,7 @@ const SkuTable = () => {
                       <Form.Control
                         required
                         type="string"
+                        value={brandCode}
                         onChange={(e) => {
                           setBrandCode(e.target.value);
                         }}
@@ -192,6 +193,7 @@ const SkuTable = () => {
                       <Form.Control
                         required
                         type="text"
+                        value={years}
                         onChange={(e) => {
                           setYears(e.target.value);
                         }}
@@ -202,6 +204,7 @@ const SkuTable = () => {
                   <FloatingLabel controlId="floatingSelect" label="シーズン">
                     <Form.Select
                       aria-label="Floating label select example"
+                      value={season}
                       onChange={(e) => {
                         setSeason(e.target.value);
                       }}
@@ -214,6 +217,7 @@ const SkuTable = () => {
                   <FloatingLabel controlId="floatingSelect" label="大カテゴリ">
                     <Form.Select
                       aria-label="Floating label select example"
+                      value={largeCategory}
                       onChange={(e) => {
                         setLargeCategory(e.target.value);
                       }}
@@ -273,6 +277,7 @@ const SkuTable = () => {
                       <Form.Control
                         required
                         type="text"
+                        value={smallCategory}
                         onChange={(e) => {
                           setSmallCategory(e.target.value);
                         }}
@@ -283,8 +288,9 @@ const SkuTable = () => {
                   <FloatingLabel controlId="floatingSelect" label="カラー番号">
                     <Form.Select
                       aria-label="Floating label select example"
+                      value={colorCode}
                       onChange={(e) => {
-                        setColorNumber(e.target.value);
+                        setColorCode(e.target.value);
                       }}
                     >
                       <option value="">選択</option>
