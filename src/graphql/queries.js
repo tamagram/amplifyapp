@@ -48,3 +48,38 @@ export const listProducts = /* GraphQL */ `
     }
   }
 `;
+export const listProductsSortBySku = /* GraphQL */ `
+  query ListProductsSortBySku(
+    $sku: String
+    $sortDirection: ModelSortDirection
+    $filter: ModelProductFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listProductsSortBySku(
+      sku: $sku
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        price
+        size
+        brandCode
+        year
+        season
+        largeCategory
+        mediumCategory
+        smallCategory
+        color
+        sku
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

@@ -1,4 +1,10 @@
-type Product @model @auth(rules: [{ allow: public }]) {
+type Product
+  @model
+  @key(
+    name: "SortBySku"
+    fields: ["sku"]
+    queryField: "listProductsSortBySku"
+  ) {
   id: ID!
   name: String!
   price: Int
@@ -10,5 +16,5 @@ type Product @model @auth(rules: [{ allow: public }]) {
   mediumCategory: String!
   smallCategory: String!
   color: String!
-  sku: String! @index(name: "SortBySku", queryField: "listProductsSortBySku")
+  sku: String!
 }
