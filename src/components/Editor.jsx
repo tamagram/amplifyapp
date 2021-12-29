@@ -75,14 +75,6 @@ const Editor = () => {
       alert("価格が未入力です。");
       return;
     }
-    if (size === "") {
-      alert("サイズが未入力です。");
-      return;
-    }
-    if (!size.match(/[A-Z]/)) {
-      alert("サイズが正しくありません。");
-      return;
-    }
     const gotProducts = await API.graphql({
       query: listProductsQuery,
       variables: {
