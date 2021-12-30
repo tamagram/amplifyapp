@@ -22,6 +22,10 @@ import { SkuContext } from "../App";
 const Editor = () => {
   const { sku, setSku } = useContext(SkuContext);
 
+  const [csv, setCsv] = useState("");
+  const [showImportCsv, setShowImportCsv] = useState(false);
+  const [csvProducts, setCsvProducts] = useState([]);
+
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [size, setSize] = useState("");
@@ -155,6 +159,82 @@ const Editor = () => {
     let message = smallCategories.join(", ");
     message += "がすでに存在しています。";
     setSmallCategoryMessage(message);
+  };
+
+  const createProductsFromCsv = () => {
+    try {
+      const csvProductKeys = csv
+        .split("\n")
+        .slice(0, 1)[0]
+        .replace(/"/g, "")
+        .split(",");
+      const csvProductsValues = csv.split("\n").slice(1);
+      const products = csvProductsValues
+        .filter((csvProduct) => {
+          return csvProduct.length > 0;
+        })
+        .map((csvProduct) => {
+          const productValues = csvProduct.replace(/"/g, "").split(",");
+          let product = {};
+          csvProductKeys.forEach((key, index) => {
+            if (
+              key === "id" ||
+              key === "name" ||
+              key === "price" ||
+              key === "size" ||
+              key === "brandCode" ||
+              key === "year" ||
+              key === "season" ||
+              key === "largeCategory" ||
+              key === "mediumCategory" ||
+              key === "smallCategory" ||
+              key === "color" ||
+              key === "sku"
+            ) {
+              product[key] = productValues[index];
+            }
+          });
+          return product;
+        });
+      console.dir(products);
+      products.forEach((product) => {
+        API.graphql({
+          query: listProductsQuery,
+          variables: {
+            filter: {
+              sku: {
+                eq: product.sku,
+              },
+            },
+          },
+        })
+          .then((res) => {
+            if (res.data.listProducts.items.length === 0) {
+              API.graphql({
+                query: createProductMutation,
+                variables: {
+                  input: product,
+                },
+              })
+                .then(() => {
+                  console.log(product.sku + "を登録しました。");
+                })
+                .catch((err) => {
+                  console.log(product.sku + "の登録に失敗しました。");
+                  console.error(err);
+                });
+            } else {
+              console.log(product.sku + "はすでに存在しています。");
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      });
+    } catch (err) {
+      console.error(err);
+      alert("CSV形式が正しくありません。");
+    }
   };
 
   return (
@@ -372,20 +452,61 @@ const Editor = () => {
                   </Col>
                 </Form.Group>
 
-                <Button variant="primary" onClick={createProduct}>
-                  リストに追加
-                </Button>
-                <Alert variant="secondary">
+                <Alert className="mt-2" variant="secondary">
                   {smallCategoryMessage}
                   <br />
                   <Button
-                    className="m-1"
+                    className="mt-2"
                     variant="primary"
                     onClick={asignSmallCategory}
                   >
                     小カテゴリ割り当て
                   </Button>
                 </Alert>
+                <Button variant="primary" onClick={createProduct}>
+                  リストに追加
+                </Button>
+                <Button
+                  className="mt-2"
+                  variant="success"
+                  onClick={() => {
+                    setShowImportCsv(true);
+                  }}
+                >
+                  CSVインポート
+                </Button>
+                <Modal
+                  size="lg"
+                  show={showImportCsv}
+                  onHide={() => setShowImportCsv(false)}
+                >
+                  <Container>
+                    <Card className="my-3">
+                      <Stack gap={2} className="m-3">
+                        <Button
+                          variant="primary"
+                          onClick={createProductsFromCsv}
+                        >
+                          取り込み
+                        </Button>
+                        <FloatingLabel
+                          controlId="floatingTextarea2"
+                          label="CSVを入力してください"
+                        >
+                          <Form.Control
+                            as="textarea"
+                            placeholder="Leave a comment here"
+                            style={{ height: "80vh" }}
+                            value={csv}
+                            onChange={(e) => {
+                              setCsv(e.target.value);
+                            }}
+                          />
+                        </FloatingLabel>
+                      </Stack>
+                    </Card>
+                  </Container>
+                </Modal>
               </Stack>
             </Col>
           </Row>

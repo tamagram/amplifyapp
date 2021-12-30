@@ -17,6 +17,7 @@ import { listProducts as listProductsQuery } from "../graphql/queries";
 import {
   updateProduct as updateProductMutation,
   deleteProduct as deleteProductMutation,
+  createProduct as createProductMutation,
 } from "../graphql/mutations";
 
 const SkuTable = () => {
@@ -25,6 +26,9 @@ const SkuTable = () => {
   const [queryFilter, setQueryFilter] = useState({});
   const [products, setProducts] = useState([]);
   const [show, setShow] = useState(false);
+  const [showCsv, setShowCsv] = useState(false);
+
+  const [csv, setCsv] = useState("");
 
   const [showEdit, setShowEdit] = useState(false);
   const [editingTarget, setEditingTarget] = useState({});
@@ -181,6 +185,46 @@ const SkuTable = () => {
         console.log(error);
         alert("削除に失敗しました");
       });
+  };
+
+  const generateCsv = () => {
+    let csvData =
+      '"id","__typename","brandCode","color","createdAt","largeCategory","mediumCategory","name","price","season","size","sku","smallCategory","updatedAt","year"\n';
+    products.forEach((product) => {
+      csvData +=
+        '"' +
+        product.id +
+        '","' +
+        "Product" +
+        '","' +
+        product.brandCode +
+        '","' +
+        product.color +
+        '","' +
+        product.createdAt +
+        '","' +
+        product.largeCategory +
+        '","' +
+        product.mediumCategory +
+        '","' +
+        product.name +
+        '","' +
+        product.price +
+        '","' +
+        product.season +
+        '","' +
+        product.size +
+        '","' +
+        product.sku +
+        '","' +
+        product.smallCategory +
+        '","' +
+        product.updatedAt +
+        '","' +
+        product.year +
+        '"\n';
+    });
+    setCsv(csvData);
   };
 
   const productsLi = products.map((product) => (
@@ -404,9 +448,39 @@ const SkuTable = () => {
                 )}
               </Col>
               <Col>
-                <Button size="lg" variant="primary" onClick={fetchProducts}>
+                <Button
+                  size="lg"
+                  variant="primary"
+                  onClick={() => {
+                    setShowCsv(true);
+                    generateCsv();
+                  }}
+                >
                   CSV
                 </Button>
+                <Modal
+                  size="lg"
+                  show={showCsv}
+                  onHide={() => setShowCsv(false)}
+                >
+                  <Container>
+                    <Stack gap={2} className="m-3">
+                      <Card>
+                        <FloatingLabel
+                          controlId="floatingTextarea2"
+                          label="取得結果をCSV形式にしています"
+                        >
+                          <Form.Control
+                            as="textarea"
+                            placeholder="Leave a comment here"
+                            style={{ height: "80vh" }}
+                            value={csv}
+                          />
+                        </FloatingLabel>
+                      </Card>
+                    </Stack>
+                  </Container>
+                </Modal>
               </Col>
               <Col>
                 <Button size="lg" variant="secondary" onClick={fetchProducts}>
