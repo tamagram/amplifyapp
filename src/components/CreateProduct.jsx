@@ -15,6 +15,7 @@ import {
   Alert,
 } from "react-bootstrap";
 import { SkuContext, ReloadTableContext } from "../App";
+import { ConsoleLogger } from "@aws-amplify/core";
 
 const Editor = () => {
   const { sku, setSku } = useContext(SkuContext);
@@ -62,7 +63,7 @@ const Editor = () => {
     colorCode,
   ]);
 
-  const createProduct = async () => {
+  const createProduct = () => {
     if (sku.length !== 14 || sku.match(/(x|選択)/)) {
       alert("SKUが正しくありません。");
       return;
@@ -75,7 +76,7 @@ const Editor = () => {
       alert("価格が未入力です。");
       return;
     }
-    const gotProducts = await API.graphql({
+    API.graphql({
       query: listProductsQuery,
       variables: {
         filter: {
@@ -84,37 +85,42 @@ const Editor = () => {
           },
         },
       },
-    });
-    if (gotProducts.data.listProducts.items.length > 0) {
-      alert("すでに存在するSKUです。");
-      return;
-    }
-    const newProduct = {
-      name: name,
-      price: price,
-      size: size,
-      brandCode: brandCode,
-      year: years,
-      season: season,
-      largeCategory: largeCategory,
-      mediumCategory: mediumCategory,
-      smallCategory: smallCategory,
-      color: colorCode,
-      sku: sku,
-      object: "Product",
-    };
-    console.dir(newProduct);
-    API.graphql({
-      query: createProductMutation,
-      variables: {
-        input: newProduct,
-      },
     })
-      .then(() => {
-        alert("登録しました。");
-        setReloadTable(true);
+      .then((data) => {
+        if (data.data.listProducts.items.length > 0) {
+          alert("既に登録されているSKUです。");
+          return;
+        }
+        API.graphql({
+          query: createProductMutation,
+          variables: {
+            input: {
+              name: name,
+              price: price,
+              size: size,
+              brandCode: brandCode,
+              year: years,
+              season: season,
+              largeCategory: largeCategory,
+              mediumCategory: mediumCategory,
+              smallCategory: smallCategory,
+              color: colorCode,
+              sku: sku,
+              object: "Product",
+            },
+          },
+        })
+          .then(() => {
+            alert("登録しました。");
+            setReloadTable(true);
+          })
+          .catch((err) => {
+            alert("登録に失敗しました。");
+            console.error(err);
+          });
       })
       .catch((err) => {
+        console.log("検証に失敗しました。");
         console.error(err);
       });
   };
