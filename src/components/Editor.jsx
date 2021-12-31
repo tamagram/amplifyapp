@@ -123,6 +123,30 @@ const Editor = () => {
   };
 
   const asignSmallCategory = async () => {
+    if (brandCode === "") {
+      setSmallCategoryMessage("ブランドコードが未入力です。");
+      return;
+    }
+    if (years === "") {
+      setSmallCategoryMessage("年数が未入力です。");
+      return;
+    }
+    if (season === "x") {
+      setSmallCategoryMessage("シーズンが未入力です。");
+      return;
+    }
+    if (largeCategory === "x") {
+      setSmallCategoryMessage("大カテゴリが未入力です。");
+      return;
+    }
+    if (mediumCategory === "xx") {
+      setSmallCategoryMessage("中カテゴリが未入力です。");
+      return;
+    }
+    if (colorCode === "xxx") {
+      setSmallCategoryMessage("カラー番号が未入力です。");
+      return;
+    }
     const gotProducts = await API.graphql({
       query: listProductsQuery,
       variables: {
@@ -155,11 +179,20 @@ const Editor = () => {
       setSmallCategory("01");
       return;
     }
-    let smallCategories = gotProducts.data.listProducts.items.map(
-      (item) => item.smallCategory + "(" + item.size + ")"
-    );
+    let chSmallCategory = "00";
+    const smallCategories = gotProducts.data.listProducts.items.map((item) => {
+      if (chSmallCategory < item.smallCategory)
+        chSmallCategory = item.smallCategory;
+      return item.smallCategory + "(" + item.size + ")";
+    });
+    if (chSmallCategory === "99") {
+      setSmallCategoryMessage("これ以上小カテゴリを追加できません。");
+      return;
+    }
     let message = smallCategories.join(", ");
-    message += "がすでに存在しています。";
+    message += "がすでに存在しています。\n";
+    message += chSmallCategory + " +1 を設定しました。";
+    setSmallCategory(("0" + (parseInt(chSmallCategory) + 1)).slice(-2));
     setSmallCategoryMessage(message);
   };
 
@@ -288,7 +321,7 @@ const Editor = () => {
                       setSeason(e.target.value);
                     }}
                   >
-                    <option>選択</option>
+                    <option value="x">選択</option>
                     <option value="1">SS : 1</option>
                     <option value="3">AW : 3</option>
                   </Form.Select>
@@ -301,7 +334,7 @@ const Editor = () => {
                       setLargeCategory(e.target.value);
                     }}
                   >
-                    <option>選択</option>
+                    <option value="x">選択</option>
                     <option value="1">トップス : 1</option>
                     <option value="2">ボトムス : 2</option>
                     <option value="3">ワンピース、セットアップ : 3</option>
@@ -318,7 +351,7 @@ const Editor = () => {
                       setMediumCategory(e.target.value);
                     }}
                   >
-                    <option>選択</option>
+                    <option value="xx">選択</option>
                     <option>◆トップス◆</option>
                     <option value="11">Tシャツ : 11</option>
                     <option value="12">シャツ : 12</option>
@@ -373,7 +406,7 @@ const Editor = () => {
                       setColorCode(e.target.value);
                     }}
                   >
-                    <option>選択</option>
+                    <option value="xxx">選択</option>
                     <option value="100">WHT : 100</option>
                     <option value="001">BLK : 001</option>
                     <option value="200">NVY : 200</option>
