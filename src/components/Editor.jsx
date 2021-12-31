@@ -358,7 +358,6 @@ const Editor = () => {
                       required
                       type="text"
                       value={smallCategory}
-                      defaultValue="xx"
                       onChange={(e) => {
                         setSmallCategory(e.target.value);
                       }}

@@ -668,7 +668,6 @@ const SkuTable = () => {
                           required
                           type="text"
                           value={editingTarget.smallCategory}
-                          defaultValue="xx"
                           onChange={(e) => {
                             // setSmallCategory(e.target.value);
                             setEditingTarget({
