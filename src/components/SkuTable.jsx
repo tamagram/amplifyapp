@@ -74,57 +74,51 @@ const SkuTable = () => {
   }, [products, setProducts, reloadTable, setReloadTable, queryFilter]);
 
   useEffect(() => {
-    const filter = {};
-    if (name) {
-      filter.name = {
-        contains: name,
-      };
-    }
-    if (price) {
-      filter.price = {
-        eq: price,
-      };
-    }
-    if (size) {
-      filter.size = {
-        eq: size,
-      };
-    }
-    if (brandCode) {
-      filter.brandCode = {
-        eq: brandCode,
-      };
-    }
-    if (year) {
-      filter.year = {
-        eq: year,
-      };
-    }
-    if (season) {
-      filter.season = {
-        eq: season,
-      };
-    }
-    if (largeCategory) {
-      filter.largeCategory = {
-        eq: largeCategory,
-      };
-    }
-    if (mediumCategory) {
-      filter.mediumCategory = {
-        eq: mediumCategory,
-      };
-    }
-    if (smallCategory) {
-      filter.smallCategory = {
-        eq: smallCategory,
-      };
-    }
-    if (colorCode) {
-      filter.color = {
-        eq: colorCode,
-      };
-    }
+    const generateFilter = () => {
+      const filter = {};
+      if (name)
+        filter.name = {
+          contains: name,
+        };
+      if (price)
+        filter.price = {
+          eq: price,
+        };
+      if (size)
+        filter.size = {
+          eq: size,
+        };
+      if (brandCode)
+        filter.brandCode = {
+          eq: brandCode,
+        };
+      if (year)
+        filter.year = {
+          eq: year,
+        };
+      if (season)
+        filter.season = {
+          eq: season,
+        };
+      if (largeCategory)
+        filter.largeCategory = {
+          eq: largeCategory,
+        };
+      if (mediumCategory)
+        filter.mediumCategory = {
+          eq: mediumCategory,
+        };
+      if (smallCategory)
+        filter.smallCategory = {
+          eq: smallCategory,
+        };
+      if (colorCode)
+        filter.color = {
+          eq: colorCode,
+        };
+      return filter;
+    };
+    const filter = generateFilter();
     setQueryFilter(filter);
     console.dir(filter);
   }, [
@@ -203,6 +197,7 @@ const SkuTable = () => {
     setCsv(csvData);
   };
 
+  // JSX
   const productsLi = products.map((product) => (
     <ProductRecord product={product} key={product.id} />
   ));

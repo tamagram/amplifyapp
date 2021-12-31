@@ -15,7 +15,6 @@ import {
   Alert,
 } from "react-bootstrap";
 import { SkuContext, ReloadTableContext } from "../App";
-import { ConsoleLogger } from "@aws-amplify/core";
 
 const Editor = () => {
   const { sku, setSku } = useContext(SkuContext);

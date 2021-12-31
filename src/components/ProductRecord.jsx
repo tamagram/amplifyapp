@@ -107,6 +107,7 @@ const ProductRecord = (props) => {
     color,
   ]);
 
+  // JSX
   return (
     <tr key={product.id}>
       <td>{product.name}</td>
