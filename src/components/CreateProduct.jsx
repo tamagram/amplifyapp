@@ -125,7 +125,7 @@ const Editor = () => {
       });
   };
 
-  const asignSmallCategory = async () => {
+  const assignSmallCategory = async () => {
     if (brandCode === "") {
       setSmallCategoryMessage("ブランドコードが未入力です。");
       return;
@@ -496,7 +496,7 @@ const Editor = () => {
                   <Button
                     className="mt-2"
                     variant="primary"
-                    onClick={asignSmallCategory}
+                    onClick={assignSmallCategory}
                   >
                     小カテゴリ割り当て
                   </Button>
