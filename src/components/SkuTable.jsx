@@ -18,11 +18,7 @@ import {
   listProducts as listProductsQuery,
   listProductsSortByCreatedAt as listProductsSortByCreatedAtQuery,
 } from "../graphql/queries";
-import {
-  updateProduct as updateProductMutation,
-  deleteProduct as deleteProductMutation,
-  createProduct as createProductMutation,
-} from "../graphql/mutations";
+
 import ProductRecord from "./ProductRecord";
 
 const SkuTable = () => {
@@ -32,13 +28,9 @@ const SkuTable = () => {
   const [dbMessage, setDbMessage] = useState("Loading...");
   const [dbConnected, setDbConnected] = useState(false);
   const [queryFilter, setQueryFilter] = useState({});
-  const [show, setShow] = useState(false);
   const [showCsv, setShowCsv] = useState(false);
 
   const [csv, setCsv] = useState("");
-
-  const [showEdit, setShowEdit] = useState(false);
-  const [editingTarget, setEditingTarget] = useState({});
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
@@ -222,11 +214,7 @@ const SkuTable = () => {
             <Card>
               <Stack gap={2} className="m-3">
                 <h5>絞り込み</h5>
-                <Form.Group
-                  className="mb-3"
-                  as={Row}
-                  controlId="validationCustom01"
-                >
+                <Form.Group as={Row} controlId="validationCustom01">
                   <Form.Label column sm="5">
                     商品名
                   </Form.Label>
@@ -237,6 +225,42 @@ const SkuTable = () => {
                       value={name}
                       onChange={(e) => {
                         setName(e.target.value);
+                      }}
+                    />
+                  </Col>
+                  <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group as={Row} controlId="validationCustom01">
+                  <Form.Label column sm="5">
+                    価格
+                  </Form.Label>
+                  <Col>
+                    <Form.Control
+                      required
+                      type="string"
+                      value={price}
+                      onChange={(e) => {
+                        setPrice(e.target.value);
+                      }}
+                    />
+                  </Col>
+                  <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group
+                  className="mb-3"
+                  as={Row}
+                  controlId="validationCustom01"
+                >
+                  <Form.Label column sm="5">
+                    サイズ
+                  </Form.Label>
+                  <Col>
+                    <Form.Control
+                      required
+                      type="string"
+                      value={size}
+                      onChange={(e) => {
+                        setSize(e.target.value);
                       }}
                     />
                   </Col>

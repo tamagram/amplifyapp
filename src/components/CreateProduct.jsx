@@ -1,9 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { API } from "aws-amplify";
-import {
-  getProduct as getProductQuery,
-  listProducts as listProductsQuery,
-} from "../graphql/queries";
+import { listProducts as listProductsQuery } from "../graphql/queries";
 import { createProduct as createProductMutation } from "../graphql/mutations";
 import {
   Form,
@@ -21,7 +18,7 @@ import { SkuContext, ReloadTableContext } from "../App";
 
 const Editor = () => {
   const { sku, setSku } = useContext(SkuContext);
-  const { reloadTable, setReloadTable } = useContext(ReloadTableContext);
+  const { setReloadTable } = useContext(ReloadTableContext);
 
   const [csv, setCsv] = useState("");
   const [showImportCsv, setShowImportCsv] = useState(false);

@@ -20,7 +20,7 @@ const ProductRecord = (props) => {
   const [product, setProduct] = useState(props.product);
   const [show, setShow] = useState(false);
 
-  const [id, setId] = useState(product.id);
+  const [id, _] = useState(product.id);
   const [name, setName] = useState(product.name);
   const [price, setPrice] = useState(product.price);
   const [size, setSize] = useState(product.size);
