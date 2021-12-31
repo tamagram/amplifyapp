@@ -11,7 +11,7 @@ import {
 } from "@aws-amplify/ui-react";
 import { AuthState, onAuthUIStateChange } from "@aws-amplify/ui-components";
 
-import Editor from "./components/Editor";
+import Editor from "./components/CreateProduct";
 import SkuTable from "./components/SkuTable";
 
 const dict = {
