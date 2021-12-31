@@ -1,38 +1,19 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-amplifyapp-dev-62259-authRole",
-      "UnauthRoleArn": "arn:aws:iam::426558955866:role/amplify-amplifyapp-dev-62259-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::426558955866:role/amplify-amplifyapp-dev-62259-authRole",
+      "AuthRoleName": "amplify-adakustskuregister-dev-43350-authRole",
+      "UnauthRoleArn": "arn:aws:iam::414214767084:role/amplify-adakustskuregister-dev-43350-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::414214767084:role/amplify-adakustskuregister-dev-43350-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-amplifyapp-dev-62259-deployment",
-      "UnauthRoleName": "amplify-amplifyapp-dev-62259-unauthRole",
-      "StackName": "amplify-amplifyapp-dev-62259",
-      "StackId": "arn:aws:cloudformation:us-east-1:426558955866:stack/amplify-amplifyapp-dev-62259/31ed8b00-5936-11ec-ac46-0e20ad14d3ad",
-      "AmplifyAppId": "d2uwop18jvlk2d"
+      "DeploymentBucketName": "amplify-adakustskuregister-dev-43350-deployment",
+      "UnauthRoleName": "amplify-adakustskuregister-dev-43350-unauthRole",
+      "StackName": "amplify-adakustskuregister-dev-43350",
+      "StackId": "arn:aws:cloudformation:us-east-1:414214767084:stack/amplify-adakustskuregister-dev-43350/6bdaa970-69a7-11ec-8b84-0e8b22d12a1f",
+      "AmplifyAppId": "d36r919hsuqkfb"
     },
     "categories": {
       "auth": {
-        "amplifyappcdb29fb0": {}
-      }
-    }
-  },
-  "sku": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-amplifyapp-sku-222523-authRole",
-      "UnauthRoleArn": "arn:aws:iam::426558955866:role/amplify-amplifyapp-sku-222523-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::426558955866:role/amplify-amplifyapp-sku-222523-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-amplifyapp-sku-222523-deployment",
-      "UnauthRoleName": "amplify-amplifyapp-sku-222523-unauthRole",
-      "StackName": "amplify-amplifyapp-sku-222523",
-      "StackId": "arn:aws:cloudformation:us-east-1:426558955866:stack/amplify-amplifyapp-sku-222523/a37ccb50-67e1-11ec-8ad5-0aad0531510f",
-      "AmplifyAppId": "d2uwop18jvlk2d"
-    },
-    "categories": {
-      "auth": {
-        "amplifyappcdb29fb0": {},
-        "amplifyapp92316586": {}
+        "adakustskuregister71ca9917": {}
       }
     }
   }

@@ -17,6 +17,7 @@ export const getProduct = /* GraphQL */ `
       color
       sku
       createdAt
+      object
       updatedAt
     }
   }
@@ -42,22 +43,25 @@ export const listProducts = /* GraphQL */ `
         color
         sku
         createdAt
+        object
         updatedAt
       }
       nextToken
     }
   }
 `;
-export const listProductsSortBySku = /* GraphQL */ `
-  query ListProductsSortBySku(
-    $sku: String
+export const listProductsSortByCreatedAt = /* GraphQL */ `
+  query ListProductsSortByCreatedAt(
+    $object: String
+    $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelProductFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listProductsSortBySku(
-      sku: $sku
+    listProductsSortByCreatedAt(
+      object: $object
+      createdAt: $createdAt
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -77,6 +81,7 @@ export const listProductsSortBySku = /* GraphQL */ `
         color
         sku
         createdAt
+        object
         updatedAt
       }
       nextToken

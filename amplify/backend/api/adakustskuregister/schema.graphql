@@ -1,0 +1,26 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+input AMPLIFY {
+  globalAuthRule: AuthRule = { allow: public }
+} # FOR TESTING ONLY!
+type Product @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  name: String!
+  price: Int
+  size: String
+  brandCode: String!
+  year: String!
+  season: String!
+  largeCategory: String!
+  mediumCategory: String!
+  smallCategory: String!
+  color: String!
+  sku: String!
+  createdAt: AWSDateTime!
+  object: String!
+    @index(
+      name: "SortByCreatedAt"
+      sortKeyFields: ["createdAt"]
+      queryField: "listProductsSortByCreatedAt"
+    )
+}

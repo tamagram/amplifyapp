@@ -20,6 +20,7 @@ export const createProduct = /* GraphQL */ `
       color
       sku
       createdAt
+      object
       updatedAt
     }
   }
@@ -43,6 +44,7 @@ export const updateProduct = /* GraphQL */ `
       color
       sku
       createdAt
+      object
       updatedAt
     }
   }
@@ -66,6 +68,7 @@ export const deleteProduct = /* GraphQL */ `
       color
       sku
       createdAt
+      object
       updatedAt
     }
   }
