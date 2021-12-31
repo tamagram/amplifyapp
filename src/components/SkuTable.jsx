@@ -13,6 +13,7 @@ import {
 } from "react-bootstrap";
 import { useState, useEffect, useContext } from "react";
 import { API } from "aws-amplify";
+import { ProductsContext, ReloadTableContext } from "../App";
 import {
   listProducts as listProductsQuery,
   listProductsSortByCreatedAt as listProductsSortByCreatedAtQuery,
@@ -24,10 +25,12 @@ import {
 } from "../graphql/mutations";
 
 const SkuTable = () => {
+  const { products, setProducts } = useContext(ProductsContext);
+  const { reloadTable, setReloadTable } = useContext(ReloadTableContext);
+
   const [dbMessage, setDbMessage] = useState("Loading...");
   const [dbConnected, setDbConnected] = useState(false);
   const [queryFilter, setQueryFilter] = useState({});
-  const [products, setProducts] = useState([]);
   const [show, setShow] = useState(false);
   const [showCsv, setShowCsv] = useState(false);
 
@@ -50,8 +53,32 @@ const SkuTable = () => {
   const [colorCode, setColorCode] = useState("");
 
   useEffect(() => {
+    if (reloadTable) {
+      setReloadTable(false);
+    }
+    const fetchProducts = () => {
+      API.graphql({
+        query: listProductsSortByCreatedAtQuery,
+        variables: {
+          object: "Product",
+          sortDirection: "DESC",
+          filter: queryFilter,
+        },
+      })
+        .then((apiData) => {
+          const gotProducts = apiData.data.listProductsSortByCreatedAt.items;
+          setProducts(gotProducts);
+          setDbConnected(true);
+          setDbMessage(gotProducts.length + "件のデータを取得しました");
+        })
+        .catch((error) => {
+          console.error(error);
+          setDbConnected(false);
+          setDbMessage("データベースに接続できませんでした。");
+        });
+    };
     fetchProducts();
-  }, []);
+  }, [products, setProducts, reloadTable, setReloadTable, queryFilter]);
 
   useEffect(() => {
     const filter = {};
@@ -120,28 +147,7 @@ const SkuTable = () => {
     colorCode,
   ]);
 
-  const fetchProducts = async () => {
-    API.graphql({
-      query: listProductsSortByCreatedAtQuery,
-      variables: {
-        object: "Product",
-        sortDirection: "DESC",
-      },
-    })
-      .then((apiData) => {
-        const gotProducts = apiData.data.listProductsSortByCreatedAt.items;
-        setProducts(gotProducts);
-        setDbConnected(true);
-        setDbMessage(gotProducts.length + "件のデータを取得しました");
-      })
-      .catch((error) => {
-        console.error(error);
-        setDbConnected(false);
-        setDbMessage("データベースに接続できませんでした。");
-      });
-  };
-
-  const searchProducts = async () => {
+  const searchProducts = () => {
     API.graphql({
       query: listProductsQuery,
       variables: {
@@ -153,6 +159,7 @@ const SkuTable = () => {
         setProducts(gotProducts);
         setDbConnected(true);
         setDbMessage(gotProducts.length + "件のデータを取得しました。");
+        alert();
       })
       .catch((error) => {
         setDbConnected(false);
@@ -189,7 +196,6 @@ const SkuTable = () => {
     })
       .then(() => {
         alert("削除しました");
-        fetchProducts();
       })
       .catch((error) => {
         console.log(error);
@@ -501,7 +507,11 @@ const SkuTable = () => {
                 </Modal>
               </Col>
               <Col>
-                <Button size="lg" variant="secondary" onClick={fetchProducts}>
+                <Button
+                  size="lg"
+                  variant="secondary"
+                  onClick={() => setReloadTable(true)}
+                >
                   更新
                 </Button>
               </Col>
@@ -781,7 +791,7 @@ const SkuTable = () => {
                   <Button
                     md="8"
                     variant="primary"
-                    onClick={async () => {
+                    onClick={() => {
                       setEditingTarget({
                         ...editingTarget,
                         sku:

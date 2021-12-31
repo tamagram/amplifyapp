@@ -17,14 +17,14 @@ import {
   Modal,
   Alert,
 } from "react-bootstrap";
-import { SkuContext } from "../App";
+import { SkuContext, ReloadTableContext } from "../App";
 
 const Editor = () => {
   const { sku, setSku } = useContext(SkuContext);
+  const { reloadTable, setReloadTable } = useContext(ReloadTableContext);
 
   const [csv, setCsv] = useState("");
   const [showImportCsv, setShowImportCsv] = useState(false);
-  const [csvProducts, setCsvProducts] = useState([]);
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
@@ -115,6 +115,7 @@ const Editor = () => {
     })
       .then(() => {
         alert("登録しました。");
+        setReloadTable(true);
       })
       .catch((err) => {
         console.error(err);

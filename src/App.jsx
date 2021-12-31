@@ -28,16 +28,29 @@ I18n.putVocabularies(dict);
 I18n.setLanguage("ja");
 
 export const SkuContext = createContext();
+export const ProductsContext = createContext();
+export const ReloadTableContext = createContext();
 
 function App() {
   const [authState, setAuthState] = useState();
   const [user, setUser] = useState();
 
   const [sku, setSku] = useState("000000000-000");
-  const value = {
+  const skuValues = {
     sku,
     setSku,
   };
+  const [products, setProducts] = useState([]);
+  const productsValues = {
+    products,
+    setProducts,
+  };
+  const [reloadTable, setReloadTable] = useState([]);
+  const reloadTableValues = {
+    reloadTable,
+    setReloadTable,
+  };
+
   useEffect(() => {
     return onAuthUIStateChange((nextAuthState, authData) => {
       setAuthState(nextAuthState);
@@ -52,10 +65,14 @@ function App() {
         <AmplifySignOut className="btn" />
       </header>
       <main>
-        <SkuContext.Provider value={value}>
-          <Editor />
-        </SkuContext.Provider>
-        <SkuTable />
+        <ProductsContext.Provider value={productsValues}>
+          <ReloadTableContext.Provider value={reloadTableValues}>
+            <SkuContext.Provider value={skuValues}>
+              <Editor />
+            </SkuContext.Provider>
+            <SkuTable />
+          </ReloadTableContext.Provider>
+        </ProductsContext.Provider>
       </main>
     </div>
   ) : (
