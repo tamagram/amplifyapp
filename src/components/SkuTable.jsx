@@ -242,7 +242,12 @@ const SkuTable = () => {
   const productsLi = products.map((product) => (
     <tr key={product.id}>
       <td>{product.name}</td>
-      <td>{product.price || "未設定"}</td>
+      <td>
+        {product.price
+          ? "￥" +
+            product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+          : "未設定"}
+      </td>
       <td>{product.size || "未設定"}</td>
       <td>{product.sku}</td>
       <td>
