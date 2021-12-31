@@ -64,18 +64,21 @@ const Editor = () => {
   ]);
 
   const createProduct = () => {
-    if (sku.length !== 14 || sku.match(/(x|選択)/)) {
-      alert("SKUが正しくありません。");
-      return;
-    }
-    if (!name) {
-      alert("商品名が未入力です。");
-      return;
-    }
-    if (price === "") {
-      alert("価格が未入力です。");
-      return;
-    }
+    const validate = () => {
+      if (sku.length !== 14 || sku.match(/(x|選択)/)) {
+        alert("SKUが正しくありません。");
+        return;
+      }
+      if (!name) {
+        alert("商品名が未入力です。");
+        return;
+      }
+      if (price === "") {
+        alert("価格が未入力です。");
+        return;
+      }
+    };
+    validate();
     API.graphql({
       query: listProductsQuery,
       variables: {
@@ -86,8 +89,8 @@ const Editor = () => {
         },
       },
     })
-      .then((data) => {
-        if (data.data.listProducts.items.length > 0) {
+      .then((value) => {
+        if (value.data.listProducts.items.length > 0) {
           alert("既に登録されているSKUです。");
           return;
         }
@@ -120,37 +123,40 @@ const Editor = () => {
           });
       })
       .catch((err) => {
-        console.log("検証に失敗しました。");
+        alert("検証に失敗しました。");
         console.error(err);
       });
   };
 
   const assignSmallCategory = async () => {
-    if (brandCode === "") {
-      setSmallCategoryMessage("ブランドコードが未入力です。");
-      return;
-    }
-    if (years === "") {
-      setSmallCategoryMessage("年数が未入力です。");
-      return;
-    }
-    if (season === "x") {
-      setSmallCategoryMessage("シーズンが未入力です。");
-      return;
-    }
-    if (largeCategory === "x") {
-      setSmallCategoryMessage("大カテゴリが未入力です。");
-      return;
-    }
-    if (mediumCategory === "xx") {
-      setSmallCategoryMessage("中カテゴリが未入力です。");
-      return;
-    }
-    if (colorCode === "xxx") {
-      setSmallCategoryMessage("カラー番号が未入力です。");
-      return;
-    }
-    const gotProducts = await API.graphql({
+    const validate = () => {
+      if (brandCode === "") {
+        setSmallCategoryMessage("ブランドコードが未入力です。");
+        return;
+      }
+      if (years === "") {
+        setSmallCategoryMessage("年数が未入力です。");
+        return;
+      }
+      if (season === "x") {
+        setSmallCategoryMessage("シーズンが未入力です。");
+        return;
+      }
+      if (largeCategory === "x") {
+        setSmallCategoryMessage("大カテゴリが未入力です。");
+        return;
+      }
+      if (mediumCategory === "xx") {
+        setSmallCategoryMessage("中カテゴリが未入力です。");
+        return;
+      }
+      if (colorCode === "xxx") {
+        setSmallCategoryMessage("カラー番号が未入力です。");
+        return;
+      }
+    };
+    validate();
+    API.graphql({
       query: listProductsQuery,
       variables: {
         filter: {
@@ -174,33 +180,39 @@ const Editor = () => {
           },
         },
       },
-    });
-    if (gotProducts.data.listProducts.items.length === 0) {
-      setSmallCategoryMessage(
-        "ほかのサイズが存在しないため、小カテゴリに01を設定しました。"
-      );
-      setSmallCategory("01");
-      return;
-    }
-    let chSmallCategory = "00";
-    const smallCategories = gotProducts.data.listProducts.items.map((item) => {
-      if (chSmallCategory < item.smallCategory)
-        chSmallCategory = item.smallCategory;
-      return item.smallCategory + "(" + item.size + ")";
-    });
-    if (chSmallCategory === "99") {
-      setSmallCategoryMessage("これ以上小カテゴリを追加できません。");
-      return;
-    }
-    let message = smallCategories.join(", ");
-    message += "がすでに存在しています。\n";
-    message += chSmallCategory + " +1 を設定しました。";
-    setSmallCategory(("0" + (parseInt(chSmallCategory) + 1)).slice(-2));
-    setSmallCategoryMessage(message);
+    })
+      .then((value) => {
+        if (value.data.listProducts.items.length === 0) {
+          setSmallCategoryMessage(
+            "ほかのサイズが存在しないため、小カテゴリに01を設定しました。"
+          );
+          setSmallCategory("01");
+          return;
+        }
+        let chSmallCategory = "00";
+        const smallCategories = value.data.listProducts.items.map((item) => {
+          if (chSmallCategory < item.smallCategory)
+            chSmallCategory = item.smallCategory;
+          return item.smallCategory + "(" + item.size + ")";
+        });
+        if (chSmallCategory === "99") {
+          setSmallCategoryMessage("これ以上小カテゴリを追加できません。");
+          return;
+        }
+        let message = smallCategories.join(", ");
+        message += "がすでに存在しています。\n";
+        message += chSmallCategory + " +1 を設定しました。";
+        setSmallCategory(("0" + (parseInt(chSmallCategory) + 1)).slice(-2));
+        setSmallCategoryMessage(message);
+      })
+      .catch((err) => {
+        alert("検証に失敗しました。");
+        console.error(err);
+      });
   };
 
   const createProductsFromCsv = () => {
-    try {
+    const parseCsv = (csv) => {
       const csvProductKeys = csv
         .split("\n")
         .slice(0, 1)[0]
@@ -235,7 +247,9 @@ const Editor = () => {
           });
           return product;
         });
-      console.dir(products);
+      return products;
+    };
+    const createProducts = (products) => {
       products.forEach((product) => {
         API.graphql({
           query: listProductsQuery,
@@ -270,12 +284,18 @@ const Editor = () => {
             console.error(err);
           });
       });
+    };
+    try {
+      const products = parseCsv(csv);
+      console.dir(products);
+      createProducts(products);
     } catch (err) {
       console.error(err);
       alert("CSV形式が正しくありません。");
     }
   };
 
+  // JSX
   return (
     <>
       <Container>
