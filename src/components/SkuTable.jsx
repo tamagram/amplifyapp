@@ -13,7 +13,10 @@ import {
 } from "react-bootstrap";
 import { useState, useEffect, useContext } from "react";
 import { API } from "aws-amplify";
-import { listProducts as listProductsQuery } from "../graphql/queries";
+import {
+  listProducts as listProductsQuery,
+  listProductsSortByCreatedAt as listProductsSortByCreatedAtQuery,
+} from "../graphql/queries";
 import {
   updateProduct as updateProductMutation,
   deleteProduct as deleteProductMutation,
@@ -118,14 +121,21 @@ const SkuTable = () => {
   ]);
 
   const fetchProducts = async () => {
-    API.graphql({ query: listProductsQuery })
+    API.graphql({
+      query: listProductsSortByCreatedAtQuery,
+      variables: {
+        object: "Product",
+        sortDirection: "DESC",
+      },
+    })
       .then((apiData) => {
-        const gotProducts = apiData.data.listProducts.items;
+        const gotProducts = apiData.data.listProductsSortByCreatedAt.items;
         setProducts(gotProducts);
         setDbConnected(true);
         setDbMessage(gotProducts.length + "件のデータを取得しました");
       })
       .catch((error) => {
+        console.error(error);
         setDbConnected(false);
         setDbMessage("データベースに接続できませんでした。");
       });
@@ -189,7 +199,7 @@ const SkuTable = () => {
 
   const generateCsv = () => {
     let csvData =
-      '"id","__typename","brandCode","color","createdAt","largeCategory","mediumCategory","name","price","season","size","sku","smallCategory","updatedAt","year"\n';
+      '"id","__typename","brandCode","color","createdAt","largeCategory","mediumCategory","name","object","price","season","size","sku","smallCategory","updatedAt","year"\n';
     products.forEach((product) => {
       csvData +=
         '"' +
@@ -208,6 +218,8 @@ const SkuTable = () => {
         product.mediumCategory +
         '","' +
         product.name +
+        '","' +
+        "Product" +
         '","' +
         product.price +
         '","' +
@@ -252,6 +264,7 @@ const SkuTable = () => {
               smallCategory: product.smallCategory,
               color: product.color,
               sku: product.sku,
+              object: "Product",
             });
           }}
         >

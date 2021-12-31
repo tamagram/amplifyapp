@@ -104,6 +104,7 @@ const Editor = () => {
       smallCategory: smallCategory,
       color: colorCode,
       sku: sku,
+      object: "Product",
     };
     console.dir(newProduct);
     API.graphql({
@@ -176,6 +177,7 @@ const Editor = () => {
         .map((csvProduct) => {
           const productValues = csvProduct.replace(/"/g, "").split(",");
           let product = {};
+          product["object"] = "Product";
           csvProductKeys.forEach((key, index) => {
             if (
               key === "id" ||
