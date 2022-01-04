@@ -393,7 +393,7 @@ const SkuTable = () => {
                     <option value="400">KHK : 400</option>
                     <option value="500">GRY : 500</option>
                     <option value="550">L/GRY : 550</option>
-                    <option value="660">GRN : 600</option>
+                    <option value="600">GRN : 600</option>
                     <option value="700">YLW : 700</option>
                     <option value="800">RED : 800</option>
                     <option value="900">BLU : 900</option>
