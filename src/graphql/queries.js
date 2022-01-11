@@ -52,7 +52,7 @@ export const listProducts = /* GraphQL */ `
 `;
 export const listProductsSortByCreatedAt = /* GraphQL */ `
   query ListProductsSortByCreatedAt(
-    $object: String
+    $object: String!
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelProductFilterInput
