@@ -45,7 +45,7 @@ function App() {
     products,
     setProducts,
   };
-  const [reloadTable, setReloadTable] = useState([]);
+  const [reloadTable, setReloadTable] = useState(false);
   const reloadTableValues = {
     reloadTable,
     setReloadTable,

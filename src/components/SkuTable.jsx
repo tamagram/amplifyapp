@@ -46,6 +46,9 @@ const SkuTable = () => {
   const [colorCode, setColorCode] = useState("");
 
   useEffect(() => {
+    if (reloadTable) {
+      setReloadTable(false);
+    }
     const fetchProducts = () => {
       API.graphql({
         query: listProductsSortByCreatedAtQuery,
@@ -68,7 +71,7 @@ const SkuTable = () => {
         });
     };
     fetchProducts();
-  }, [setProducts, queryFilter]);
+  }, [setProducts, queryFilter, reloadTable, setReloadTable]);
 
   useEffect(() => {
     const generateFilter = () => {
