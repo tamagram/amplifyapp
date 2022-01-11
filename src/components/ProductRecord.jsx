@@ -9,16 +9,18 @@ import {
   Form,
   FloatingLabel,
 } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { API } from "aws-amplify";
 import {
   updateProduct as updateProductMutation,
   deleteProduct as deleteProductMutation,
 } from "../graphql/mutations";
+import { ReloadTableContext } from "../App";
 
 const ProductRecord = (props) => {
   const [product, setProduct] = useState(props.product);
   const [show, setShow] = useState(false);
+  const { setReloadTable } = useContext(ReloadTableContext);
 
   const [id, _] = useState(product.id);
   const [name, setName] = useState(product.name);
@@ -63,6 +65,7 @@ const ProductRecord = (props) => {
       .then(() => {
         setShow(false);
         alert("削除しました");
+        setReloadTable(true);
       })
       .catch((error) => {
         console.log(error);
