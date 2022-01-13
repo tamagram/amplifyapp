@@ -56,6 +56,7 @@ const SkuTable = () => {
           object: "Product",
           sortDirection: "DESC",
           filter: queryFilter,
+          limit: 1000,
         },
       })
         .then((apiData) => {
