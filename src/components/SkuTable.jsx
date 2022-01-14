@@ -10,6 +10,7 @@ import {
   Row,
   Stack,
   Modal,
+  Pagination,
 } from "react-bootstrap";
 import { useState, useEffect, useContext } from "react";
 import { API } from "aws-amplify";
@@ -29,6 +30,7 @@ const SkuTable = () => {
   const [dbConnected, setDbConnected] = useState(false);
   const [queryFilter, setQueryFilter] = useState({});
   const [showCsv, setShowCsv] = useState(false);
+  const [page, setPage] = useState(1);
 
   const [csv, setCsv] = useState("");
 
@@ -199,9 +201,9 @@ const SkuTable = () => {
   };
 
   // JSX
-  const productsLi = products.map((product) => (
-    <ProductRecord product={product} key={product.id} />
-  ));
+  const productsLi = products
+    .slice((page - 1) * 10, page * 10)
+    .map((product) => <ProductRecord product={product} key={product.id} />);
   return (
     <>
       <Container>
@@ -466,6 +468,15 @@ const SkuTable = () => {
                 </Button>
               </Col>
             </Row>
+            <Pagination>
+              <Pagination.First onClick={() => setPage(1)} />
+              <Pagination.Prev onClick={() => setPage(page - 1)} />
+              <Pagination.Item active>{page}</Pagination.Item>
+              <Pagination.Next onClick={() => setPage(page + 1)} />
+              <Pagination.Last
+                onClick={() => setPage(Math.ceil(products.length / 10))}
+              />
+            </Pagination>
             <Table striped bordered hover>
               <thead>
                 <tr>
