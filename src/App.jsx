@@ -13,6 +13,7 @@ import { AuthState, onAuthUIStateChange } from "@aws-amplify/ui-components";
 
 import Editor from "./components/CreateProduct";
 import SkuTable from "./components/SkuTable";
+import Printer from "./components/Printer";
 
 const dict = {
   ja: {
@@ -71,6 +72,7 @@ function App() {
               <Editor />
             </SkuContext.Provider>
             <SkuTable />
+            <Printer />
           </ReloadTableContext.Provider>
         </ProductsContext.Provider>
       </main>
