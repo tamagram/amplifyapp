@@ -9,7 +9,7 @@ doc.addFont("mplus.ttf", "mplus", "normal");
 
 const Printer = () => {
   doc.setFontSize(9);
-  
+
   // gird top
   doc.setDrawColor(0, 0, 0);
   doc.line(24, 23.75, 71, 23.75);
@@ -64,32 +64,32 @@ const Printer = () => {
   doc.setFontSize(10);
   doc.text("01211322113-500", 47, 28, null, null, "center");
   doc.setLineWidth(0.1);
-  doc.line(24, 30, 71, 30);
+  doc.line(27, 30, 68, 30);
   doc.text("Wool Mohair Cardigan", 47, 35, null, null, "center");
-  doc.line(24, 38, 71, 38);
+  doc.line(27, 38, 68, 38);
   doc.setFontSize(7);
-  doc.text("FABLIC:", 24, 43);
+  doc.text("FABLIC:", 27, 43);
   doc.setFontSize(10);
   doc.text("F", 47, 43, null, null, "center");
-  doc.line(24, 46, 71, 46);
+  doc.line(27, 46, 68, 46);
   doc.setFontSize(7);
-  doc.text("COLOR:", 24, 51);
+  doc.text("COLOR:", 27, 51);
   doc.setFontSize(10);
   doc.text("BLACK", 47, 51, null, null, "center");
-  doc.line(24, 54, 71, 54);
+  doc.line(27, 54, 68, 54);
   doc.setFontSize(7);
-  doc.text("PRICE:", 24, 59);
+  doc.text("PRICE:", 27, 59);
   doc.setFontSize(10);
   doc.text("￥9,300", 47, 59, null, null, "center");
-  doc.line(24, 62, 71, 62);
+  doc.line(27, 62, 68, 62);
   doc.setFontSize(7);
-  doc.text("FABLIC:", 24, 67);
-  doc.text("本体", 25, 71);
-  doc.text("アクリル : 30%", 26, 75);
-  doc.text("モヘア : 10%", 26, 79);
-  doc.text("ウール : 60%", 26, 83);
+  doc.text("FABLIC:", 27, 67);
+  doc.text("本体", 28, 71);
+  doc.text("アクリル : 30%", 29, 75);
+  doc.text("モヘア : 10%", 29, 79);
+  doc.text("ウール : 60%", 29, 83);
   doc.text("韓国製", 47, 89.5, null, null, "center");
-  doc.line(24, 92, 71, 92);
+  doc.line(27, 92, 68, 92);
   doc.text("株式会社 Adakust", 47, 96, null, null, "center");
   doc.text("0467-33-1399", 47, 100, null, null, "center");
 
