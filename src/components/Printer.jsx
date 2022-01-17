@@ -8,7 +8,7 @@ doc.addFileToVFS("mplus.ttf", myfont);
 doc.addFont("mplus.ttf", "mplus", "normal");
 
 const printProducts = (products) => {
-  const setFablic = (fabric) => {
+  const setFabric = (fabric) => {
     fabric.forEach((value, index) => {
       switch (index) {
         case 0:
@@ -53,7 +53,7 @@ const printProducts = (products) => {
         doc.setFontSize(7);
         doc.text("FABLIC:", 27, 67);
         doc.text("本体", 28, 71);
-        setFablic(product.fabric);
+        setFabric(product.fabric);
         doc.text("韓国製", 47, 89.5, null, null, "center");
         doc.line(27, 92, 68, 92);
         doc.text("株式会社 Adakust", 47, 96, null, null, "center");
