@@ -104,24 +104,23 @@ const generatePdf = (product) => {
         doc.setFontSize(7);
         doc.text("FABLIC:", 27, 67);
         doc.text("本体", 28, 71);
-        // product.fabric.forEach((value, index) => {
-        //   switch (index) {
-        //     case 0:
-        //       doc.text(value, 29, 75);
-        //       break;
-        //     case 1:
-        //       doc.text(value, 29, 79);
-        //       break;
-        //     case 2:
-        //       doc.text(value, 29, 83);
-        //       break;
-        //     default:
-        //       break;
-        //   }
-        // });
-        doc.text("アクリル : 30%", 29, 75);
-        doc.text("モヘア : 10%", 29, 79);
-        doc.text("ウール : 60%", 29, 83);
+        if (product.fabric) {
+          product.fabric.split("\n").forEach((value, index) => {
+            switch (index) {
+              case 0:
+                doc.text(value, 29, 75);
+                break;
+              case 1:
+                doc.text(value, 29, 79);
+                break;
+              case 2:
+                doc.text(value, 29, 83);
+                break;
+              default:
+                break;
+            }
+          });
+        }
         doc.text("韓国製", 47, 89.5, null, null, "center");
         doc.line(27, 92, 68, 92);
         doc.text("株式会社 Adakust", 47, 96, null, null, "center");
@@ -152,9 +151,23 @@ const generatePdf = (product) => {
         doc.setFontSize(7);
         doc.text("FABLIC:", 74, 67);
         doc.text("本体", 75, 71);
-        doc.text("アクリル : 30%", 76, 75);
-        doc.text("モヘア : 10%", 76, 79);
-        doc.text("ウール : 60%", 76, 83);
+        if (product.fabric) {
+          product.fabric.split("\n").forEach((value, index) => {
+            switch (index) {
+              case 0:
+                doc.text(value, 76, 75);
+                break;
+              case 1:
+                doc.text(value, 76, 79);
+                break;
+              case 2:
+                doc.text(value, 76, 83);
+                break;
+              default:
+                break;
+            }
+          });
+        }
         doc.text("韓国製", 94.5, 89.5, null, null, "center");
         doc.line(74, 92, 115, 92);
         doc.text("株式会社 Adakust", 94.5, 96, null, null, "center");
@@ -185,9 +198,23 @@ const generatePdf = (product) => {
         doc.setFontSize(7);
         doc.text("FABLIC:", 121, 67);
         doc.text("本体", 122, 71);
-        doc.text("アクリル : 30%", 123, 75);
-        doc.text("モヘア : 10%", 123, 79);
-        doc.text("ウール : 60%", 123, 83);
+        if (product.fabric) {
+          product.fabric.split("\n").forEach((value, index) => {
+            switch (index) {
+              case 0:
+                doc.text(value, 123, 75);
+                break;
+              case 1:
+                doc.text(value, 123, 79);
+                break;
+              case 2:
+                doc.text(value, 123, 83);
+                break;
+              default:
+                break;
+            }
+          });
+        }
         doc.text("韓国製", 141.5, 89.5, null, null, "center");
         doc.line(121, 92, 162, 92);
         doc.text("株式会社 Adakust", 141.5, 96, null, null, "center");
@@ -218,9 +245,23 @@ const generatePdf = (product) => {
         doc.setFontSize(7);
         doc.text("FABLIC:", 168, 67);
         doc.text("本体", 169, 71);
-        doc.text("アクリル : 30%", 170, 75);
-        doc.text("モヘア : 10%", 171, 79);
-        doc.text("ウール : 60%", 171, 83);
+        if (product.fabric) {
+          product.fabric.split("\n").forEach((value, index) => {
+            switch (index) {
+              case 0:
+                doc.text(value, 170, 75);
+                break;
+              case 1:
+                doc.text(value, 170, 79);
+                break;
+              case 2:
+                doc.text(value, 170, 83);
+                break;
+              default:
+                break;
+            }
+          });
+        }
         doc.text("韓国製", 188.5, 89.5, null, null, "center");
         doc.line(168, 92, 209, 92);
         doc.text("株式会社 Adakust", 188.5, 96, null, null, "center");
@@ -251,9 +292,23 @@ const generatePdf = (product) => {
         doc.setFontSize(7);
         doc.text("FABLIC:", 215, 67);
         doc.text("本体", 216, 71);
-        doc.text("アクリル : 30%", 217, 75);
-        doc.text("モヘア : 10%", 217, 79);
-        doc.text("ウール : 60%", 217, 83);
+        if (product.fabric) {
+          product.fabric.split("\n").forEach((value, index) => {
+            switch (index) {
+              case 0:
+                doc.text(value, 217, 75);
+                break;
+              case 1:
+                doc.text(value, 217, 79);
+                break;
+              case 2:
+                doc.text(value, 217, 83);
+                break;
+              default:
+                break;
+            }
+          });
+        }
         doc.text("韓国製", 235.5, 89.5, null, null, "center");
         doc.line(215, 92, 256, 92);
         doc.text("株式会社 Adakust", 235.5, 96, null, null, "center");
@@ -284,9 +339,23 @@ const generatePdf = (product) => {
         doc.setFontSize(7);
         doc.text("FABLIC:", 27, 151);
         doc.text("本体", 28, 155);
-        doc.text("アクリル : 30%", 29, 159);
-        doc.text("モヘア : 10%", 29, 163);
-        doc.text("ウール : 60%", 29, 167);
+        if (product.fabric) {
+          product.fabric.split("\n").forEach((value, index) => {
+            switch (index) {
+              case 0:
+                doc.text(value, 29, 159);
+                break;
+              case 1:
+                doc.text(value, 29, 163);
+                break;
+              case 2:
+                doc.text(value, 29, 167);
+                break;
+              default:
+                break;
+            }
+          });
+        }
         doc.text("韓国製", 47, 173.5, null, null, "center");
         doc.line(27, 176, 68, 176);
         doc.text("株式会社 Adakust", 47, 180, null, null, "center");
@@ -317,9 +386,23 @@ const generatePdf = (product) => {
         doc.setFontSize(7);
         doc.text("FABLIC:", 74, 151);
         doc.text("本体", 75, 155);
-        doc.text("アクリル : 30%", 76, 159);
-        doc.text("モヘア : 10%", 76, 163);
-        doc.text("ウール : 60%", 76, 167);
+        if (product.fabric) {
+          product.fabric.split("\n").forEach((value, index) => {
+            switch (index) {
+              case 0:
+                doc.text(value, 76, 159);
+                break;
+              case 1:
+                doc.text(value, 76, 163);
+                break;
+              case 2:
+                doc.text(value, 76, 167);
+                break;
+              default:
+                break;
+            }
+          });
+        }
         doc.text("韓国製", 94.5, 173.5, null, null, "center");
         doc.line(74, 176, 115, 176);
         doc.text("株式会社 Adakust", 94.5, 180, null, null, "center");
@@ -350,9 +433,23 @@ const generatePdf = (product) => {
         doc.setFontSize(7);
         doc.text("FABLIC:", 121, 151);
         doc.text("本体", 122, 155);
-        doc.text("アクリル : 30%", 123, 159);
-        doc.text("モヘア : 10%", 123, 163);
-        doc.text("ウール : 60%", 123, 167);
+        if (product.fabric) {
+          product.fabric.split("\n").forEach((value, index) => {
+            switch (index) {
+              case 0:
+                doc.text(value, 123, 159);
+                break;
+              case 1:
+                doc.text(value, 123, 163);
+                break;
+              case 2:
+                doc.text(value, 123, 167);
+                break;
+              default:
+                break;
+            }
+          });
+        }
         doc.text("韓国製", 141.5, 173.5, null, null, "center");
         doc.line(121, 176, 162, 176);
         doc.text("株式会社 Adakust", 141.5, 180, null, null, "center");
@@ -383,9 +480,23 @@ const generatePdf = (product) => {
         doc.setFontSize(7);
         doc.text("FABLIC:", 168, 151);
         doc.text("本体", 169, 155);
-        doc.text("アクリル : 30%", 170, 159);
-        doc.text("モヘア : 10%", 170, 163);
-        doc.text("ウール : 60%", 170, 167);
+        if (product.fabric) {
+          product.fabric.split("\n").forEach((value, index) => {
+            switch (index) {
+              case 0:
+                doc.text(value, 170, 159);
+                break;
+              case 1:
+                doc.text(value, 170, 163);
+                break;
+              case 2:
+                doc.text(value, 170, 167);
+                break;
+              default:
+                break;
+            }
+          });
+        }
         doc.text("韓国製", 188.5, 173.5, null, null, "center");
         doc.line(168, 176, 209, 176);
         doc.text("株式会社 Adakust", 188.5, 180, null, null, "center");
@@ -416,9 +527,23 @@ const generatePdf = (product) => {
         doc.setFontSize(7);
         doc.text("FABLIC:", 215, 151);
         doc.text("本体", 216, 155);
-        doc.text("アクリル : 114%", 217, 159);
-        doc.text("モヘア : 10%", 217, 163);
-        doc.text("ウール : 60%", 217, 167);
+        if (product.fabric) {
+          product.fabric.split("\n").forEach((value, index) => {
+            switch (index) {
+              case 0:
+                doc.text(value, 217, 159);
+                break;
+              case 1:
+                doc.text(value, 217, 163);
+                break;
+              case 2:
+                doc.text(value, 217, 167);
+                break;
+              default:
+                break;
+            }
+          });
+        }
         doc.text("韓国製", 235.5, 173.5, null, null, "center");
         doc.line(215, 176, 256, 176);
         doc.text("株式会社 Adakust", 235.5, 180, null, null, "center");
@@ -464,6 +589,7 @@ const Printer = () => {
                     .toString()
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                 : "未設定",
+              fabric: products[0].fabric,
             };
             console.log(product);
             setData(generatePdf(product));
