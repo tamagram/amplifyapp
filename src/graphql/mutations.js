@@ -8,17 +8,18 @@ export const createProduct = /* GraphQL */ `
   ) {
     createProduct(input: $input, condition: $condition) {
       id
+      sku
       name
-      price
       size
+      color
+      price
+      fabric
       brandCode
       year
       season
       largeCategory
       mediumCategory
       smallCategory
-      color
-      sku
       createdAt
       object
       updatedAt
@@ -32,17 +33,18 @@ export const updateProduct = /* GraphQL */ `
   ) {
     updateProduct(input: $input, condition: $condition) {
       id
+      sku
       name
-      price
       size
+      color
+      price
+      fabric
       brandCode
       year
       season
       largeCategory
       mediumCategory
       smallCategory
-      color
-      sku
       createdAt
       object
       updatedAt
@@ -56,17 +58,18 @@ export const deleteProduct = /* GraphQL */ `
   ) {
     deleteProduct(input: $input, condition: $condition) {
       id
+      sku
       name
-      price
       size
+      color
+      price
+      fabric
       brandCode
       year
       season
       largeCategory
       mediumCategory
       smallCategory
-      color
-      sku
       createdAt
       object
       updatedAt

@@ -5,17 +5,18 @@ input AMPLIFY {
 } # FOR TESTING ONLY!
 type Product @model @auth(rules: [{ allow: public }]) {
   id: ID!
+  sku: String!
   name: String!
-  price: Int
   size: String
+  color: String!
+  price: Int
+  fabric: String
   brandCode: String!
   year: String!
   season: String!
   largeCategory: String!
   mediumCategory: String!
   smallCategory: String!
-  color: String!
-  sku: String!
   createdAt: AWSDateTime!
   object: String!
     @index(

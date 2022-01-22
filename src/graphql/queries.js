@@ -5,17 +5,18 @@ export const getProduct = /* GraphQL */ `
   query GetProduct($id: ID!) {
     getProduct(id: $id) {
       id
+      sku
       name
-      price
       size
+      color
+      price
+      fabric
       brandCode
       year
       season
       largeCategory
       mediumCategory
       smallCategory
-      color
-      sku
       createdAt
       object
       updatedAt
@@ -31,17 +32,18 @@ export const listProducts = /* GraphQL */ `
     listProducts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        sku
         name
-        price
         size
+        color
+        price
+        fabric
         brandCode
         year
         season
         largeCategory
         mediumCategory
         smallCategory
-        color
-        sku
         createdAt
         object
         updatedAt
@@ -69,17 +71,18 @@ export const listProductsSortByCreatedAt = /* GraphQL */ `
     ) {
       items {
         id
+        sku
         name
-        price
         size
+        color
+        price
+        fabric
         brandCode
         year
         season
         largeCategory
         mediumCategory
         smallCategory
-        color
-        sku
         createdAt
         object
         updatedAt

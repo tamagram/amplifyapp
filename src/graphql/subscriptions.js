@@ -5,17 +5,18 @@ export const onCreateProduct = /* GraphQL */ `
   subscription OnCreateProduct {
     onCreateProduct {
       id
+      sku
       name
-      price
       size
+      color
+      price
+      fabric
       brandCode
       year
       season
       largeCategory
       mediumCategory
       smallCategory
-      color
-      sku
       createdAt
       object
       updatedAt
@@ -26,17 +27,18 @@ export const onUpdateProduct = /* GraphQL */ `
   subscription OnUpdateProduct {
     onUpdateProduct {
       id
+      sku
       name
-      price
       size
+      color
+      price
+      fabric
       brandCode
       year
       season
       largeCategory
       mediumCategory
       smallCategory
-      color
-      sku
       createdAt
       object
       updatedAt
@@ -47,17 +49,18 @@ export const onDeleteProduct = /* GraphQL */ `
   subscription OnDeleteProduct {
     onDeleteProduct {
       id
+      sku
       name
-      price
       size
+      color
+      price
+      fabric
       brandCode
       year
       season
       largeCategory
       mediumCategory
       smallCategory
-      color
-      sku
       createdAt
       object
       updatedAt
