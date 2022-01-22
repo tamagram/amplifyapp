@@ -26,6 +26,7 @@ const Editor = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [size, setSize] = useState("");
+  const [fabric, setFabric] = useState("");
 
   const [brandCode, setBrandCode] = useState("01");
   const [years, setYears] = useState("21");
@@ -97,17 +98,18 @@ const Editor = () => {
           query: createProductMutation,
           variables: {
             input: {
+              sku: sku,
               name: name,
-              price: price,
               size: size,
+              color: colorCode,
+              price: price,
+              fabric: fabric,
               brandCode: brandCode,
               year: years,
               season: season,
               largeCategory: largeCategory,
               mediumCategory: mediumCategory,
               smallCategory: smallCategory,
-              color: colorCode,
-              sku: sku,
               object: "Product",
             },
           },
@@ -470,6 +472,22 @@ const Editor = () => {
                 </Form.Group>
                 <Form.Group as={Row} controlId="validationCustom01">
                   <Form.Label column sm="5">
+                    サイズ
+                  </Form.Label>
+                  <Col>
+                    <Form.Control
+                      required
+                      type="text"
+                      value={size}
+                      onChange={(e) => {
+                        setSize(e.target.value);
+                      }}
+                    />
+                  </Col>
+                  <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group as={Row} controlId="validationCustom01">
+                  <Form.Label column sm="5">
                     価格
                   </Form.Label>
                   <Col>
@@ -486,15 +504,17 @@ const Editor = () => {
                 </Form.Group>
                 <Form.Group as={Row} controlId="validationCustom01">
                   <Form.Label column sm="5">
-                    サイズ
+                    ファブリック
                   </Form.Label>
                   <Col>
                     <Form.Control
                       required
-                      type="text"
-                      value={size}
+                      as="textarea"
+                      value={fabric}
+                      placeholder={`例\nアクリル : 30%`}
+                      style={{ height: "90px" }}
                       onChange={(e) => {
-                        setSize(e.target.value);
+                        setFabric(e.target.value);
                       }}
                     />
                   </Col>

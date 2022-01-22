@@ -34,6 +34,7 @@ const ProductRecord = (props) => {
   const [mediumCategory, setMediumCategory] = useState(product.mediumCategory);
   const [smallCategory, setSmallCategory] = useState(product.smallCategory);
   const [color, setColor] = useState(product.color);
+  const [fabric, setFabric] = useState(product.fabric);
 
   const updateProduct = () => {
     API.graphql({
@@ -77,15 +78,16 @@ const ProductRecord = (props) => {
     setProduct({
       id: id,
       name: name,
-      price: price,
       size: size,
+      color: color,
+      price: price,
+      fabric: fabric,
       brandCode: brandCode,
       year: year,
       season: season,
       largeCategory: largeCategory,
       mediumCategory: mediumCategory,
       smallCategory: smallCategory,
-      color: color,
       sku:
         brandCode +
         year +
@@ -108,6 +110,7 @@ const ProductRecord = (props) => {
     mediumCategory,
     smallCategory,
     color,
+    fabric,
   ]);
 
   // JSX
@@ -324,6 +327,23 @@ const ProductRecord = (props) => {
                         value={product.price}
                         onChange={(e) => {
                           setPrice(e.target.value);
+                        }}
+                      />
+                    </Col>
+                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                  </Form.Group>
+                  <Form.Group as={Row} controlId="validationCustom01">
+                    <Form.Label column sm="5">
+                      ファブリック
+                    </Form.Label>
+                    <Col>
+                      <Form.Control
+                        required
+                        as="textarea"
+                        value={fabric}
+                        style={{ height: "90px" }}
+                        onChange={(e) => {
+                          setFabric(e.target.value);
                         }}
                       />
                     </Col>
