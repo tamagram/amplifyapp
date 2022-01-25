@@ -27,6 +27,7 @@ const Editor = () => {
   const [price, setPrice] = useState(0);
   const [size, setSize] = useState("");
   const [fabric, setFabric] = useState("");
+  const [country, setCountry] = useState("");
 
   const [brandCode, setBrandCode] = useState("01");
   const [years, setYears] = useState("21");
@@ -104,6 +105,7 @@ const Editor = () => {
               color: colorCode,
               price: price,
               fabric: fabric,
+              country: country,
               brandCode: brandCode,
               year: years,
               season: season,
@@ -515,6 +517,22 @@ const Editor = () => {
                       style={{ height: "90px" }}
                       onChange={(e) => {
                         setFabric(e.target.value);
+                      }}
+                    />
+                  </Col>
+                  <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group as={Row} controlId="validationCustom01">
+                  <Form.Label column sm="5">
+                    製造国
+                  </Form.Label>
+                  <Col>
+                    <Form.Control
+                      required
+                      type="text"
+                      value={country}
+                      onChange={(e) => {
+                        setCountry(e.target.value);
                       }}
                     />
                   </Col>

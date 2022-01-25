@@ -121,7 +121,7 @@ const generatePdf = (product) => {
             }
           });
         }
-        doc.text("韓国製", 47, 89.5, null, null, "center");
+        doc.text(product.country + "製", 47, 89.5, null, null, "center");
         doc.line(27, 92, 68, 92);
         doc.text("株式会社 Adakust", 47, 96, null, null, "center");
         doc.text("0467-33-1399", 47, 100, null, null, "center");
@@ -168,7 +168,7 @@ const generatePdf = (product) => {
             }
           });
         }
-        doc.text("韓国製", 94.5, 89.5, null, null, "center");
+        doc.text(product.country + "製", 94.5, 89.5, null, null, "center");
         doc.line(74, 92, 115, 92);
         doc.text("株式会社 Adakust", 94.5, 96, null, null, "center");
         doc.text("0467-33-1399", 94.5, 100, null, null, "center");
@@ -215,7 +215,7 @@ const generatePdf = (product) => {
             }
           });
         }
-        doc.text("韓国製", 141.5, 89.5, null, null, "center");
+        doc.text(product.country + "製", 141.5, 89.5, null, null, "center");
         doc.line(121, 92, 162, 92);
         doc.text("株式会社 Adakust", 141.5, 96, null, null, "center");
         doc.text("0467-33-1399", 141.5, 100, null, null, "center");
@@ -262,7 +262,7 @@ const generatePdf = (product) => {
             }
           });
         }
-        doc.text("韓国製", 188.5, 89.5, null, null, "center");
+        doc.text(product.country + "製", 188.5, 89.5, null, null, "center");
         doc.line(168, 92, 209, 92);
         doc.text("株式会社 Adakust", 188.5, 96, null, null, "center");
         doc.text("0467-33-1399", 188.5, 100, null, null, "center");
@@ -309,7 +309,7 @@ const generatePdf = (product) => {
             }
           });
         }
-        doc.text("韓国製", 235.5, 89.5, null, null, "center");
+        doc.text(product.country + "製", 235.5, 89.5, null, null, "center");
         doc.line(215, 92, 256, 92);
         doc.text("株式会社 Adakust", 235.5, 96, null, null, "center");
         doc.text("0467-33-1399", 235.5, 100, null, null, "center");
@@ -356,7 +356,7 @@ const generatePdf = (product) => {
             }
           });
         }
-        doc.text("韓国製", 47, 173.5, null, null, "center");
+        doc.text(product.country + "製", 47, 173.5, null, null, "center");
         doc.line(27, 176, 68, 176);
         doc.text("株式会社 Adakust", 47, 180, null, null, "center");
         doc.text("0467-33-1399", 47, 184, null, null, "center");
@@ -403,7 +403,7 @@ const generatePdf = (product) => {
             }
           });
         }
-        doc.text("韓国製", 94.5, 173.5, null, null, "center");
+        doc.text(product.country + "製", 94.5, 173.5, null, null, "center");
         doc.line(74, 176, 115, 176);
         doc.text("株式会社 Adakust", 94.5, 180, null, null, "center");
         doc.text("0467-33-1399", 94.5, 184, null, null, "center");
@@ -450,7 +450,7 @@ const generatePdf = (product) => {
             }
           });
         }
-        doc.text("韓国製", 141.5, 173.5, null, null, "center");
+        doc.text(product.country + "製", 141.5, 173.5, null, null, "center");
         doc.line(121, 176, 162, 176);
         doc.text("株式会社 Adakust", 141.5, 180, null, null, "center");
         doc.text("0467-33-1399", 141.5, 184, null, null, "center");
@@ -497,7 +497,7 @@ const generatePdf = (product) => {
             }
           });
         }
-        doc.text("韓国製", 188.5, 173.5, null, null, "center");
+        doc.text(product.country + "製", 188.5, 173.5, null, null, "center");
         doc.line(168, 176, 209, 176);
         doc.text("株式会社 Adakust", 188.5, 180, null, null, "center");
         doc.text("0467-33-1399", 188.5, 184, null, null, "center");
@@ -544,7 +544,7 @@ const generatePdf = (product) => {
             }
           });
         }
-        doc.text("韓国製", 235.5, 173.5, null, null, "center");
+        doc.text(product.country + "製", 235.5, 173.5, null, null, "center");
         doc.line(215, 176, 256, 176);
         doc.text("株式会社 Adakust", 235.5, 180, null, null, "center");
         doc.text("0467-33-1399", 235.5, 184, null, null, "center");
@@ -590,6 +590,7 @@ const Printer = () => {
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                 : "未設定",
               fabric: products[0].fabric,
+              country: products[0].country,
             };
             console.log(product);
             setData(generatePdf(product));

@@ -35,6 +35,7 @@ const ProductRecord = (props) => {
   const [smallCategory, setSmallCategory] = useState(product.smallCategory);
   const [color, setColor] = useState(product.color);
   const [fabric, setFabric] = useState(product.fabric);
+  const [country, setCountry] = useState(product.country);
 
   const updateProduct = () => {
     API.graphql({
@@ -82,6 +83,7 @@ const ProductRecord = (props) => {
       color: color,
       price: price,
       fabric: fabric,
+      country: country,
       brandCode: brandCode,
       year: year,
       season: season,
@@ -111,6 +113,7 @@ const ProductRecord = (props) => {
     smallCategory,
     color,
     fabric,
+    country,
   ]);
 
   // JSX
@@ -344,6 +347,22 @@ const ProductRecord = (props) => {
                         style={{ height: "90px" }}
                         onChange={(e) => {
                           setFabric(e.target.value);
+                        }}
+                      />
+                    </Col>
+                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                  </Form.Group>
+                  <Form.Group as={Row} controlId="validationCustom01">
+                    <Form.Label column sm="5">
+                      製造国
+                    </Form.Label>
+                    <Col>
+                      <Form.Control
+                        required
+                        type="text"
+                        value={country}
+                        onChange={(e) => {
+                          setCountry(e.target.value);
                         }}
                       />
                     </Col>
