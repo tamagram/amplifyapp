@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { API } from "aws-amplify";
 import { listProducts as listProductsQuery } from "../graphql/queries";
 
-import { myfont } from "../font/mplus";
 import { font as fontBold } from "../font/GenShinGothic-Bold";
 import { font as fontMedium } from "../font/GenShinGothic-Medium";
 import { font as fontNormal } from "../font/GenShinGothic-Normal";
@@ -63,11 +62,9 @@ const generatePdf = (product) => {
     product,
   ];
   const doc = new jsPDF("landscape");
-  doc.addFileToVFS("mplus.ttf", myfont);
   doc.addFileToVFS("GenShinGothic-Bold.ttf", fontBold);
   doc.addFileToVFS("GenShinGothic-Medium.ttf", fontMedium);
   doc.addFileToVFS("GenShinGothic-Normal.ttf", fontNormal);
-  doc.addFont("mplus.ttf", "mplus", "normal");
   doc.addFont("GenShinGothic-Bold.ttf", "GenShinGothic", "bold");
   doc.addFont("GenShinGothic-Medium.ttf", "GenShinGothic", "medium");
   doc.addFont("GenShinGothic-Normal.ttf", "GenShinGothic", "normal");
