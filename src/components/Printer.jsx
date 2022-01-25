@@ -10,6 +10,46 @@ import { font as fontMedium } from "../font/GenShinGothic-Medium";
 import { font as fontNormal } from "../font/GenShinGothic-Normal";
 
 const generatePdf = (product) => {
+  const colorCodeToString = (colorCode) => {
+    switch (colorCode) {
+      case "100":
+        return "WHITE";
+      case "001":
+        return "BLACK";
+      case "200":
+        return "NAVY";
+      case "300":
+        return "BEIGE";
+      case "400":
+        return "KHAKI";
+      case "500":
+        return "GRAY";
+      case "550":
+        return "LIGHT GRAY";
+      case "600":
+        return "GREEN";
+      case "700":
+        return "YELLOW";
+      case "800":
+        return "RED";
+      case "900":
+        return "BLUE";
+      case "050":
+        return "PURPLE";
+      case "111":
+        return "GOLD";
+      case "222":
+        return "SIlVER";
+      case "999":
+        return "MIX";
+      case "010":
+        return "BROWN";
+      case "000":
+        return "DENIM";
+      default:
+        return "";
+    }
+  };
   const products = [
     product,
     product,
@@ -106,7 +146,14 @@ const generatePdf = (product) => {
         doc.text("COLOR:", 27, 51);
         doc.setFont("GenShinGothic", "bold");
         doc.setFontSize(10);
-        doc.text(product.color, 47, 51, null, null, "center");
+        doc.text(
+          colorCodeToString(product.color),
+          47,
+          51,
+          null,
+          null,
+          "center"
+        );
         doc.line(27, 54, 68, 54);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
@@ -163,7 +210,14 @@ const generatePdf = (product) => {
         doc.text("COLOR:", 74, 51);
         doc.setFont("GenShinGothic", "bold");
         doc.setFontSize(10);
-        doc.text(product.color, 94.5, 51, null, null, "center");
+        doc.text(
+          colorCodeToString(product.color),
+          94.5,
+          51,
+          null,
+          null,
+          "center"
+        );
         doc.line(74, 54, 115, 54);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
@@ -222,7 +276,14 @@ const generatePdf = (product) => {
         doc.text("COLOR:", 121, 51);
         doc.setFont("GenShinGothic", "bold");
         doc.setFontSize(10);
-        doc.text(product.color, 141.5, 51, null, null, "center");
+        doc.text(
+          colorCodeToString(product.color),
+          141.5,
+          51,
+          null,
+          null,
+          "center"
+        );
         doc.line(121, 54, 162, 54);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
@@ -281,7 +342,14 @@ const generatePdf = (product) => {
         doc.text("COLOR:", 168, 51);
         doc.setFont("GenShinGothic", "bold");
         doc.setFontSize(10);
-        doc.text(product.color, 188.5, 51, null, null, "center");
+        doc.text(
+          colorCodeToString(product.color),
+          188.5,
+          51,
+          null,
+          null,
+          "center"
+        );
         doc.line(168, 54, 209, 54);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
@@ -340,7 +408,14 @@ const generatePdf = (product) => {
         doc.text("COLOR:", 215, 51);
         doc.setFont("GenShinGothic", "bold");
         doc.setFontSize(10);
-        doc.text(product.color, 235.5, 51, null, null, "center");
+        doc.text(
+          colorCodeToString(product.color),
+          235.5,
+          51,
+          null,
+          null,
+          "center"
+        );
         doc.line(215, 54, 256, 54);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
@@ -399,7 +474,14 @@ const generatePdf = (product) => {
         doc.text("COLOR:", 27, 135);
         doc.setFont("GenShinGothic", "bold");
         doc.setFontSize(10);
-        doc.text(product.color, 47, 135, null, null, "center");
+        doc.text(
+          colorCodeToString(product.color),
+          47,
+          135,
+          null,
+          null,
+          "center"
+        );
         doc.line(27, 138, 68, 138);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
@@ -458,7 +540,14 @@ const generatePdf = (product) => {
         doc.text("COLOR:", 74, 135);
         doc.setFont("GenShinGothic", "bold");
         doc.setFontSize(10);
-        doc.text(product.color, 94.5, 135, null, null, "center");
+        doc.text(
+          colorCodeToString(product.color),
+          94.5,
+          135,
+          null,
+          null,
+          "center"
+        );
         doc.line(74, 138, 115, 138);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
@@ -517,7 +606,14 @@ const generatePdf = (product) => {
         doc.text("COLOR:", 121, 135);
         doc.setFont("GenShinGothic", "bold");
         doc.setFontSize(10);
-        doc.text(product.color, 141.5, 135, null, null, "center");
+        doc.text(
+          colorCodeToString(product.color),
+          141.5,
+          135,
+          null,
+          null,
+          "center"
+        );
         doc.line(121, 138, 162, 138);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
@@ -576,7 +672,14 @@ const generatePdf = (product) => {
         doc.text("COLOR:", 168, 135);
         doc.setFont("GenShinGothic", "bold");
         doc.setFontSize(10);
-        doc.text(product.color, 188.5, 135, null, null, "center");
+        doc.text(
+          colorCodeToString(product.color),
+          188.5,
+          135,
+          null,
+          null,
+          "center"
+        );
         doc.line(168, 138, 209, 138);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
@@ -635,7 +738,14 @@ const generatePdf = (product) => {
         doc.text("COLOR:", 215, 135);
         doc.setFont("GenShinGothic", "bold");
         doc.setFontSize(10);
-        doc.text(product.color, 235.5, 135, null, null, "center");
+        doc.text(
+          colorCodeToString(product.color),
+          235.5,
+          135,
+          null,
+          null,
+          "center"
+        );
         doc.line(215, 138, 256, 138);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
