@@ -14,6 +14,7 @@ export const createProduct = /* GraphQL */ `
       color
       price
       fabric
+      country
       brandCode
       year
       season
@@ -39,6 +40,7 @@ export const updateProduct = /* GraphQL */ `
       color
       price
       fabric
+      country
       brandCode
       year
       season
@@ -64,6 +66,7 @@ export const deleteProduct = /* GraphQL */ `
       color
       price
       fabric
+      country
       brandCode
       year
       season

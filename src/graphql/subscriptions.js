@@ -11,6 +11,7 @@ export const onCreateProduct = /* GraphQL */ `
       color
       price
       fabric
+      country
       brandCode
       year
       season
@@ -33,6 +34,7 @@ export const onUpdateProduct = /* GraphQL */ `
       color
       price
       fabric
+      country
       brandCode
       year
       season
@@ -55,6 +57,7 @@ export const onDeleteProduct = /* GraphQL */ `
       color
       price
       fabric
+      country
       brandCode
       year
       season

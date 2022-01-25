@@ -11,6 +11,7 @@ type Product @model @auth(rules: [{ allow: public }]) {
   color: String!
   price: Int
   fabric: String
+  country: String
   brandCode: String!
   year: String!
   season: String!

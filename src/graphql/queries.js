@@ -11,6 +11,7 @@ export const getProduct = /* GraphQL */ `
       color
       price
       fabric
+      country
       brandCode
       year
       season
@@ -38,6 +39,7 @@ export const listProducts = /* GraphQL */ `
         color
         price
         fabric
+        country
         brandCode
         year
         season
@@ -77,6 +79,7 @@ export const listProductsSortByCreatedAt = /* GraphQL */ `
         color
         price
         fabric
+        country
         brandCode
         year
         season
