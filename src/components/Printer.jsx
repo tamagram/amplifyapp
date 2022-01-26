@@ -49,6 +49,16 @@ const generatePdf = (product) => {
         return "";
     }
   };
+  const setFabricItem = (value, x, y) => {
+    const [item, ratio] = value.split(":");
+    doc.setFont("GenShinGothic", "normal");
+    doc.setFontSize(6);
+    doc.text(item + ":", x, y);
+    doc.setFont("GenShinGothic", "bold");
+    doc.setFontSize(7);
+    doc.text(ratio, x + item.length * 1.8, y);
+  };
+
   const products = [
     product,
     product,
@@ -167,19 +177,21 @@ const generatePdf = (product) => {
           product.fabric.split("\n").forEach((value, index) => {
             switch (index) {
               case 0:
-                doc.text(value, 29, 75);
+                setFabricItem(value, 29, 75);
                 break;
               case 1:
-                doc.text(value, 29, 79);
+                setFabricItem(value, 29, 79);
                 break;
               case 2:
-                doc.text(value, 29, 83);
+                setFabricItem(value, 29, 83);
                 break;
               default:
                 break;
             }
           });
         }
+        doc.setFont("GenShinGothic", "normal");
+        doc.setFontSize(6);
         doc.text(product.country + "製", 47, 89.5, null, null, "center");
         doc.line(27, 92, 68, 92);
         doc.setFont("GenShinGothic", "medium");
@@ -231,13 +243,13 @@ const generatePdf = (product) => {
           product.fabric.split("\n").forEach((value, index) => {
             switch (index) {
               case 0:
-                doc.text(value, 76, 75);
+                setFabricItem(value, 76, 75);
                 break;
               case 1:
-                doc.text(value, 76, 79);
+                setFabricItem(value, 76, 79);
                 break;
               case 2:
-                doc.text(value, 76, 83);
+                setFabricItem(value, 76, 83);
                 break;
               default:
                 break;
@@ -297,13 +309,13 @@ const generatePdf = (product) => {
           product.fabric.split("\n").forEach((value, index) => {
             switch (index) {
               case 0:
-                doc.text(value, 123, 75);
+                setFabricItem(value, 123, 75);
                 break;
               case 1:
-                doc.text(value, 123, 79);
+                setFabricItem(value, 123, 79);
                 break;
               case 2:
-                doc.text(value, 123, 83);
+                setFabricItem(value, 123, 83);
                 break;
               default:
                 break;
@@ -363,13 +375,13 @@ const generatePdf = (product) => {
           product.fabric.split("\n").forEach((value, index) => {
             switch (index) {
               case 0:
-                doc.text(value, 170, 75);
+                setFabricItem(value, 170, 75);
                 break;
               case 1:
-                doc.text(value, 170, 79);
+                setFabricItem(value, 170, 79);
                 break;
               case 2:
-                doc.text(value, 170, 83);
+                setFabricItem(value, 170, 83);
                 break;
               default:
                 break;
@@ -429,13 +441,13 @@ const generatePdf = (product) => {
           product.fabric.split("\n").forEach((value, index) => {
             switch (index) {
               case 0:
-                doc.text(value, 217, 75);
+                setFabricItem(value, 217, 75);
                 break;
               case 1:
-                doc.text(value, 217, 79);
+                setFabricItem(value, 217, 79);
                 break;
               case 2:
-                doc.text(value, 217, 83);
+                setFabricItem(value, 217, 83);
                 break;
               default:
                 break;
@@ -495,13 +507,13 @@ const generatePdf = (product) => {
           product.fabric.split("\n").forEach((value, index) => {
             switch (index) {
               case 0:
-                doc.text(value, 29, 159);
+                setFabricItem(value, 29, 159);
                 break;
               case 1:
-                doc.text(value, 29, 163);
+                setFabricItem(value, 29, 163);
                 break;
               case 2:
-                doc.text(value, 29, 167);
+                setFabricItem(value, 29, 167);
                 break;
               default:
                 break;
@@ -561,13 +573,13 @@ const generatePdf = (product) => {
           product.fabric.split("\n").forEach((value, index) => {
             switch (index) {
               case 0:
-                doc.text(value, 76, 159);
+                setFabricItem(value, 76, 159);
                 break;
               case 1:
-                doc.text(value, 76, 163);
+                setFabricItem(value, 76, 163);
                 break;
               case 2:
-                doc.text(value, 76, 167);
+                setFabricItem(value, 76, 167);
                 break;
               default:
                 break;
@@ -627,13 +639,13 @@ const generatePdf = (product) => {
           product.fabric.split("\n").forEach((value, index) => {
             switch (index) {
               case 0:
-                doc.text(value, 123, 159);
+                setFabricItem(value, 123, 159);
                 break;
               case 1:
-                doc.text(value, 123, 163);
+                setFabricItem(value, 123, 163);
                 break;
               case 2:
-                doc.text(value, 123, 167);
+                setFabricItem(value, 123, 167);
                 break;
               default:
                 break;
@@ -693,13 +705,13 @@ const generatePdf = (product) => {
           product.fabric.split("\n").forEach((value, index) => {
             switch (index) {
               case 0:
-                doc.text(value, 170, 159);
+                setFabricItem(value, 170, 159);
                 break;
               case 1:
-                doc.text(value, 170, 163);
+                setFabricItem(value, 170, 163);
                 break;
               case 2:
-                doc.text(value, 170, 167);
+                setFabricItem(value, 170, 167);
                 break;
               default:
                 break;
@@ -759,13 +771,13 @@ const generatePdf = (product) => {
           product.fabric.split("\n").forEach((value, index) => {
             switch (index) {
               case 0:
-                doc.text(value, 217, 159);
+                setFabricItem(value, 217, 159);
                 break;
               case 1:
-                doc.text(value, 217, 163);
+                setFabricItem(value, 217, 163);
                 break;
               case 2:
-                doc.text(value, 217, 167);
+                setFabricItem(value, 217, 167);
                 break;
               default:
                 break;
