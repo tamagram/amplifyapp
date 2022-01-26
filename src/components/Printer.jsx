@@ -50,13 +50,13 @@ const generatePdf = (product) => {
     }
   };
   const setFabricItem = (value, x, y) => {
-    const [item, ratio] = value.split(":");
+    const [item, ratio] = value.replace(/ /g, "").split(":");
     doc.setFont("GenShinGothic", "normal");
     doc.setFontSize(6);
-    doc.text(item + ":", x, y);
+    doc.text(item + " :", x, y);
     doc.setFont("GenShinGothic", "bold");
     doc.setFontSize(7);
-    doc.text(ratio, x + item.length * 1.8, y);
+    doc.text(ratio, x + (item.length + 3) * 1.6, y);
   };
 
   const products = [
@@ -172,22 +172,25 @@ const generatePdf = (product) => {
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
         doc.text("FABRIC:", 27, 67);
-        doc.text("本体", 28, 71);
         if (product.fabric) {
+          let y = 71;
           product.fabric.split("\n").forEach((value, index) => {
-            switch (index) {
-              case 0:
-                setFabricItem(value, 29, 75);
+            switch (value) {
+              case "本体":
+                doc.setFont("GenShinGothic", "normal");
+                doc.setFontSize(6);
+                doc.text("本体", 28, y);
                 break;
-              case 1:
-                setFabricItem(value, 29, 79);
-                break;
-              case 2:
-                setFabricItem(value, 29, 83);
+              case "裏地":
+                doc.setFont("GenShinGothic", "normal");
+                doc.setFontSize(6);
+                doc.text("裏地", 28, y);
                 break;
               default:
+                setFabricItem(value, 29, y);
                 break;
             }
+            y += 3;
           });
         }
         doc.setFont("GenShinGothic", "normal");
@@ -238,22 +241,25 @@ const generatePdf = (product) => {
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
         doc.text("FABRIC:", 74, 67);
-        doc.text("本体", 75, 71);
         if (product.fabric) {
+          let y = 71;
           product.fabric.split("\n").forEach((value, index) => {
-            switch (index) {
-              case 0:
-                setFabricItem(value, 76, 75);
+            switch (value) {
+              case "本体":
+                doc.setFont("GenShinGothic", "normal");
+                doc.setFontSize(6);
+                doc.text("本体", 75, y);
                 break;
-              case 1:
-                setFabricItem(value, 76, 79);
-                break;
-              case 2:
-                setFabricItem(value, 76, 83);
+              case "裏地":
+                doc.setFont("GenShinGothic", "normal");
+                doc.setFontSize(6);
+                doc.text("裏地", 75, y);
                 break;
               default:
+                setFabricItem(value, 76, y);
                 break;
             }
+            y += 3;
           });
         }
         doc.setFont("GenShinGothic", "normal");
@@ -304,22 +310,25 @@ const generatePdf = (product) => {
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
         doc.text("FABRIC:", 121, 67);
-        doc.text("本体", 122, 71);
         if (product.fabric) {
+          let y = 71;
           product.fabric.split("\n").forEach((value, index) => {
-            switch (index) {
-              case 0:
-                setFabricItem(value, 123, 75);
+            switch (value) {
+              case "本体":
+                doc.setFont("GenShinGothic", "normal");
+                doc.setFontSize(6);
+                doc.text("本体", 122, y);
                 break;
-              case 1:
-                setFabricItem(value, 123, 79);
-                break;
-              case 2:
-                setFabricItem(value, 123, 83);
+              case "裏地":
+                doc.setFont("GenShinGothic", "normal");
+                doc.setFontSize(6);
+                doc.text("裏地", 122, y);
                 break;
               default:
+                setFabricItem(value, 123, y);
                 break;
             }
+            y += 3;
           });
         }
         doc.setFont("GenShinGothic", "normal");
@@ -370,22 +379,25 @@ const generatePdf = (product) => {
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
         doc.text("FABRIC:", 168, 67);
-        doc.text("本体", 169, 71);
         if (product.fabric) {
+          let y = 71;
           product.fabric.split("\n").forEach((value, index) => {
-            switch (index) {
-              case 0:
-                setFabricItem(value, 170, 75);
+            switch (value) {
+              case "本体":
+                doc.setFont("GenShinGothic", "normal");
+                doc.setFontSize(6);
+                doc.text("本体", 169, y);
                 break;
-              case 1:
-                setFabricItem(value, 170, 79);
-                break;
-              case 2:
-                setFabricItem(value, 170, 83);
+              case "裏地":
+                doc.setFont("GenShinGothic", "normal");
+                doc.setFontSize(6);
+                doc.text("裏地", 169, y);
                 break;
               default:
+                setFabricItem(value, 170, y);
                 break;
             }
+            y += 3;
           });
         }
         doc.setFont("GenShinGothic", "normal");
@@ -436,22 +448,25 @@ const generatePdf = (product) => {
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
         doc.text("FABRIC:", 215, 67);
-        doc.text("本体", 216, 71);
         if (product.fabric) {
+          let y = 71;
           product.fabric.split("\n").forEach((value, index) => {
-            switch (index) {
-              case 0:
-                setFabricItem(value, 217, 75);
+            switch (value) {
+              case "本体":
+                doc.setFont("GenShinGothic", "normal");
+                doc.setFontSize(6);
+                doc.text("本体", 216, y);
                 break;
-              case 1:
-                setFabricItem(value, 217, 79);
-                break;
-              case 2:
-                setFabricItem(value, 217, 83);
+              case "裏地":
+                doc.setFont("GenShinGothic", "normal");
+                doc.setFontSize(6);
+                doc.text("裏地", 216, y);
                 break;
               default:
+                setFabricItem(value, 217, y);
                 break;
             }
+            y += 3;
           });
         }
         doc.setFont("GenShinGothic", "normal");
@@ -502,22 +517,25 @@ const generatePdf = (product) => {
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
         doc.text("FABRIC:", 27, 151);
-        doc.text("本体", 28, 155);
         if (product.fabric) {
+          let y = 155;
           product.fabric.split("\n").forEach((value, index) => {
-            switch (index) {
-              case 0:
-                setFabricItem(value, 29, 159);
+            switch (value) {
+              case "本体":
+                doc.setFont("GenShinGothic", "normal");
+                doc.setFontSize(6);
+                doc.text("本体", 28, y);
                 break;
-              case 1:
-                setFabricItem(value, 29, 163);
-                break;
-              case 2:
-                setFabricItem(value, 29, 167);
+              case "裏地":
+                doc.setFont("GenShinGothic", "normal");
+                doc.setFontSize(6);
+                doc.text("裏地", 28, y);
                 break;
               default:
+                setFabricItem(value, 29, y);
                 break;
             }
+            y += 3;
           });
         }
         doc.setFont("GenShinGothic", "normal");
@@ -568,22 +586,25 @@ const generatePdf = (product) => {
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
         doc.text("FABRIC:", 74, 151);
-        doc.text("本体", 75, 155);
         if (product.fabric) {
+          let y = 155;
           product.fabric.split("\n").forEach((value, index) => {
-            switch (index) {
-              case 0:
-                setFabricItem(value, 76, 159);
+            switch (value) {
+              case "本体":
+                doc.setFont("GenShinGothic", "normal");
+                doc.setFontSize(6);
+                doc.text("本体", 75, y);
                 break;
-              case 1:
-                setFabricItem(value, 76, 163);
-                break;
-              case 2:
-                setFabricItem(value, 76, 167);
+              case "裏地":
+                doc.setFont("GenShinGothic", "normal");
+                doc.setFontSize(6);
+                doc.text("裏地", 75, y);
                 break;
               default:
+                setFabricItem(value, 76, y);
                 break;
             }
+            y += 3;
           });
         }
         doc.setFont("GenShinGothic", "normal");
@@ -634,22 +655,25 @@ const generatePdf = (product) => {
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
         doc.text("FABRIC:", 121, 151);
-        doc.text("本体", 122, 155);
         if (product.fabric) {
+          let y = 155;
           product.fabric.split("\n").forEach((value, index) => {
-            switch (index) {
-              case 0:
-                setFabricItem(value, 123, 159);
+            switch (value) {
+              case "本体":
+                doc.setFont("GenShinGothic", "normal");
+                doc.setFontSize(6);
+                doc.text("本体", 122, y);
                 break;
-              case 1:
-                setFabricItem(value, 123, 163);
-                break;
-              case 2:
-                setFabricItem(value, 123, 167);
+              case "裏地":
+                doc.setFont("GenShinGothic", "normal");
+                doc.setFontSize(6);
+                doc.text("裏地", 122, y);
                 break;
               default:
+                setFabricItem(value, 123, y);
                 break;
             }
+            y += 3;
           });
         }
         doc.setFont("GenShinGothic", "normal");
@@ -700,22 +724,25 @@ const generatePdf = (product) => {
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
         doc.text("FABRIC:", 168, 151);
-        doc.text("本体", 169, 155);
         if (product.fabric) {
+          let y = 155;
           product.fabric.split("\n").forEach((value, index) => {
-            switch (index) {
-              case 0:
-                setFabricItem(value, 170, 159);
+            switch (value) {
+              case "本体":
+                doc.setFont("GenShinGothic", "normal");
+                doc.setFontSize(6);
+                doc.text("本体", 169, y);
                 break;
-              case 1:
-                setFabricItem(value, 170, 163);
-                break;
-              case 2:
-                setFabricItem(value, 170, 167);
+              case "裏地":
+                doc.setFont("GenShinGothic", "normal");
+                doc.setFontSize(6);
+                doc.text("裏地", 169, y);
                 break;
               default:
+                setFabricItem(value, 170, y);
                 break;
             }
+            y += 3;
           });
         }
         doc.setFont("GenShinGothic", "normal");
@@ -766,22 +793,25 @@ const generatePdf = (product) => {
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
         doc.text("FABRIC:", 215, 151);
-        doc.text("本体", 216, 155);
         if (product.fabric) {
+          let y = 155;
           product.fabric.split("\n").forEach((value, index) => {
-            switch (index) {
-              case 0:
-                setFabricItem(value, 217, 159);
+            switch (value) {
+              case "本体":
+                doc.setFont("GenShinGothic", "normal");
+                doc.setFontSize(6);
+                doc.text("本体", 216, y);
                 break;
-              case 1:
-                setFabricItem(value, 217, 163);
-                break;
-              case 2:
-                setFabricItem(value, 217, 167);
+              case "裏地":
+                doc.setFont("GenShinGothic", "normal");
+                doc.setFontSize(6);
+                doc.text("裏地", 216, y);
                 break;
               default:
+                setFabricItem(value, 217, y);
                 break;
             }
+            y += 3;
           });
         }
         doc.setFont("GenShinGothic", "normal");
