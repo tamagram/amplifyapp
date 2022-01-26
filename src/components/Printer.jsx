@@ -161,7 +161,7 @@ const generatePdf = (product) => {
         doc.line(27, 62, 68, 62);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
-        doc.text("FABLIC:", 27, 67);
+        doc.text("FABRIC:", 27, 67);
         doc.text("本体", 28, 71);
         if (product.fabric) {
           product.fabric.split("\n").forEach((value, index) => {
@@ -225,7 +225,7 @@ const generatePdf = (product) => {
         doc.line(74, 62, 115, 62);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
-        doc.text("FABLIC:", 74, 67);
+        doc.text("FABRIC:", 74, 67);
         doc.text("本体", 75, 71);
         if (product.fabric) {
           product.fabric.split("\n").forEach((value, index) => {
@@ -291,7 +291,7 @@ const generatePdf = (product) => {
         doc.line(121, 62, 162, 62);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
-        doc.text("FABLIC:", 121, 67);
+        doc.text("FABRIC:", 121, 67);
         doc.text("本体", 122, 71);
         if (product.fabric) {
           product.fabric.split("\n").forEach((value, index) => {
@@ -357,7 +357,7 @@ const generatePdf = (product) => {
         doc.line(168, 62, 209, 62);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
-        doc.text("FABLIC:", 168, 67);
+        doc.text("FABRIC:", 168, 67);
         doc.text("本体", 169, 71);
         if (product.fabric) {
           product.fabric.split("\n").forEach((value, index) => {
@@ -423,7 +423,7 @@ const generatePdf = (product) => {
         doc.line(215, 62, 256, 62);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
-        doc.text("FABLIC:", 215, 67);
+        doc.text("FABRIC:", 215, 67);
         doc.text("本体", 216, 71);
         if (product.fabric) {
           product.fabric.split("\n").forEach((value, index) => {
@@ -489,7 +489,7 @@ const generatePdf = (product) => {
         doc.line(27, 146, 68, 146);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
-        doc.text("FABLIC:", 27, 151);
+        doc.text("FABRIC:", 27, 151);
         doc.text("本体", 28, 155);
         if (product.fabric) {
           product.fabric.split("\n").forEach((value, index) => {
@@ -555,7 +555,7 @@ const generatePdf = (product) => {
         doc.line(74, 146, 115, 146);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
-        doc.text("FABLIC:", 74, 151);
+        doc.text("FABRIC:", 74, 151);
         doc.text("本体", 75, 155);
         if (product.fabric) {
           product.fabric.split("\n").forEach((value, index) => {
@@ -621,7 +621,7 @@ const generatePdf = (product) => {
         doc.line(121, 146, 162, 146);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
-        doc.text("FABLIC:", 121, 151);
+        doc.text("FABRIC:", 121, 151);
         doc.text("本体", 122, 155);
         if (product.fabric) {
           product.fabric.split("\n").forEach((value, index) => {
@@ -687,7 +687,7 @@ const generatePdf = (product) => {
         doc.line(168, 146, 209, 146);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
-        doc.text("FABLIC:", 168, 151);
+        doc.text("FABRIC:", 168, 151);
         doc.text("本体", 169, 155);
         if (product.fabric) {
           product.fabric.split("\n").forEach((value, index) => {
@@ -753,7 +753,7 @@ const generatePdf = (product) => {
         doc.line(215, 146, 256, 146);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
-        doc.text("FABLIC:", 215, 151);
+        doc.text("FABRIC:", 215, 151);
         doc.text("本体", 216, 155);
         if (product.fabric) {
           product.fabric.split("\n").forEach((value, index) => {
