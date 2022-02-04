@@ -1,5 +1,6 @@
 {
   "AppSyncApiName": "adakustskuregister",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2022-02-04T11:55:04.030Z"
 }

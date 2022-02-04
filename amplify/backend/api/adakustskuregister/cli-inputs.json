@@ -6,7 +6,11 @@
     "gqlSchemaPath": "/home/tamagram/business/amplifyapp/amplify/backend/api/adakustskuregister/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
-      "expirationTime": 7
-    }
+      "expirationTime": 365,
+      "apiKeyExpirationDate": "2023-02-04T11:54:57.371Z",
+      "keyDescription": ""
+    },
+    "conflictResolution": {},
+    "additionalAuthTypes": []
   }
 }
