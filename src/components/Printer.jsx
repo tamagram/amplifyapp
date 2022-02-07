@@ -50,7 +50,7 @@ const generatePdf = (product) => {
     }
   };
   const setFabricItem = (value, x, y) => {
-    const [item, ratio] = value.replace(/ /g, "").split(":");
+    const [item, ratio] = value.replace(/ /g, "").split(/[:|：]/);
     doc.setFont("GenShinGothic", "normal");
     doc.setFontSize(6);
     doc.text(item + " :", x, y);
