@@ -47,6 +47,8 @@ const SkuTable = () => {
   // -
   const [colorCode, setColorCode] = useState("");
 
+  const [sku, setSku] = useState("");
+
   useEffect(() => {
     if (reloadTable) {
       setReloadTable(false);
@@ -79,6 +81,11 @@ const SkuTable = () => {
   useEffect(() => {
     const generateFilter = () => {
       const filter = {};
+      if (sku) {
+        filter.sku = {
+          contains: sku,
+        };
+      }
       if (name)
         filter.name = {
           contains: name,
@@ -135,6 +142,7 @@ const SkuTable = () => {
     mediumCategory,
     smallCategory,
     colorCode,
+    sku,
   ]);
 
   const searchProducts = () => {
@@ -212,6 +220,22 @@ const SkuTable = () => {
             <Card>
               <Stack gap={2} className="m-3">
                 <h5>絞り込み</h5>
+                <Form.Group as={Row} controlId="validationCustom01">
+                  <Form.Label column sm="5">
+                    SKU
+                  </Form.Label>
+                  <Col>
+                    <Form.Control
+                      required
+                      type="string"
+                      value={sku}
+                      onChange={(e) => {
+                        setSku(e.target.value);
+                      }}
+                    />
+                  </Col>
+                  <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                </Form.Group>
                 <Form.Group as={Row} controlId="validationCustom01">
                   <Form.Label column sm="5">
                     商品名
