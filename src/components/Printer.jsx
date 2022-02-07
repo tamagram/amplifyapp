@@ -164,7 +164,11 @@ const generatePdf = (product) => {
         doc.line(27, 54, 68, 54);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
-        doc.text("PRICE:", 27, 59);
+        doc.text(
+          "PRICE:                                                            税込",
+          27,
+          59
+        );
         doc.setFont("GenShinGothic", "bold");
         doc.setFontSize(10);
         doc.text(product.price, 47, 59, null, null, "center");
@@ -233,7 +237,11 @@ const generatePdf = (product) => {
         doc.line(74, 54, 115, 54);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
-        doc.text("PRICE:", 74, 59);
+        doc.text(
+          "PRICE:                                                            税込",
+          74,
+          59
+        );
         doc.setFont("GenShinGothic", "bold");
         doc.setFontSize(10);
         doc.text(product.price, 94.5, 59, null, null, "center");
@@ -302,7 +310,11 @@ const generatePdf = (product) => {
         doc.line(121, 54, 162, 54);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
-        doc.text("PRICE:", 121, 59);
+        doc.text(
+          "PRICE:                                                            税込",
+          121,
+          59
+        );
         doc.setFont("GenShinGothic", "bold");
         doc.setFontSize(10);
         doc.text(product.price, 141.5, 59, null, null, "center");
@@ -371,7 +383,11 @@ const generatePdf = (product) => {
         doc.line(168, 54, 209, 54);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
-        doc.text("PRICE:", 168, 59);
+        doc.text(
+          "PRICE:                                                            税込",
+          168,
+          59
+        );
         doc.setFont("GenShinGothic", "bold");
         doc.setFontSize(10);
         doc.text(product.price, 188.5, 59, null, null, "center");
@@ -440,7 +456,11 @@ const generatePdf = (product) => {
         doc.line(215, 54, 256, 54);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
-        doc.text("PRICE:", 215, 59);
+        doc.text(
+          "PRICE:                                                            税込",
+          215,
+          59
+        );
         doc.setFont("GenShinGothic", "bold");
         doc.setFontSize(10);
         doc.text(product.price, 235.5, 59, null, null, "center");
@@ -509,7 +529,11 @@ const generatePdf = (product) => {
         doc.line(27, 138, 68, 138);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
-        doc.text("PRICE:", 27, 143);
+        doc.text(
+          "PRICE:                                                            税込",
+          27,
+          143
+        );
         doc.setFont("GenShinGothic", "bold");
         doc.setFontSize(10);
         doc.text(product.price, 47, 143, null, null, "center");
@@ -578,7 +602,11 @@ const generatePdf = (product) => {
         doc.line(74, 138, 115, 138);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
-        doc.text("PRICE:", 74, 143);
+        doc.text(
+          "PRICE:                                                            税込",
+          74,
+          143
+        );
         doc.setFont("GenShinGothic", "bold");
         doc.setFontSize(10);
         doc.text(product.price, 94.5, 143, null, null, "center");
@@ -647,7 +675,11 @@ const generatePdf = (product) => {
         doc.line(121, 138, 162, 138);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
-        doc.text("PRICE:", 121, 143);
+        doc.text(
+          "PRICE:                                                            税込",
+          121,
+          143
+        );
         doc.setFont("GenShinGothic", "bold");
         doc.setFontSize(10);
         doc.text(product.price, 141.5, 143, null, null, "center");
@@ -716,7 +748,11 @@ const generatePdf = (product) => {
         doc.line(168, 138, 209, 138);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
-        doc.text("PRICE:", 168, 143);
+        doc.text(
+          "PRICE:                                                            税込",
+          168,
+          143
+        );
         doc.setFont("GenShinGothic", "bold");
         doc.setFontSize(10);
         doc.text(product.price, 188.5, 143, null, null, "center");
@@ -785,7 +821,11 @@ const generatePdf = (product) => {
         doc.line(215, 138, 256, 138);
         doc.setFont("GenShinGothic", "normal");
         doc.setFontSize(6);
-        doc.text("PRICE:", 215, 143);
+        doc.text(
+          "PRICE:                                                            税込",
+          215,
+          143
+        );
         doc.setFont("GenShinGothic", "bold");
         doc.setFontSize(10);
         doc.text(product.price, 235.5, 143, null, null, "center");
