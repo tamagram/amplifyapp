@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import { API } from "aws-amplify";
 import { listProducts as listProductsQuery } from "../graphql/queries";
 import jsPDF from "jspdf";
-import { generatePdf } from "../modules/jspdf";
+import { generatePdf } from "../pdf/generatePdf";
+import generateRakutenPdf from "../pdf/generateRakutenPdf";
 
 const Printer = () => {
   const [sku, setSku] = useState("0000000000-000");
@@ -33,17 +34,16 @@ const Printer = () => {
               name: products[0].name,
               size: products[0].size,
               color: products[0].color,
-              price: products[0].price
-                ? "￥" +
-                  products[0].price
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                : "未設定",
+              price: products[0].price,
               fabric: products[0].fabric,
               country: products[0].country,
             };
             console.log(product);
-            setData(generatePdf(product));
+            if (isRakuten) {
+              setData(generateRakutenPdf(product));
+            } else {
+              setData(generatePdf(product));
+            }
           } else {
             console.log("No product found");
           }
@@ -53,7 +53,7 @@ const Printer = () => {
         });
     };
     fetchProductsBySku(sku);
-  }, [sku]);
+  }, [sku, isRakuten]);
 
   const iframe = (
     <iframe
