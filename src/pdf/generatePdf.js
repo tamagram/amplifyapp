@@ -95,7 +95,17 @@ export const generatePdf = (product) => {
     );
     doc.setFont("GenShinGothic", "bold");
     doc.setFontSize(10);
-    doc.text(product.price, adjustedX + 20, y + 35.25, null, null, "center");
+    doc.text(
+      product.price
+        ? "￥" +
+            products[0].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        : "未設定",
+      adjustedX + 20,
+      y + 35.25,
+      null,
+      null,
+      "center"
+    );
     doc.line(adjustedX, y + 38.25, adjustedX + 41, y + 38.25);
     doc.setFont("GenShinGothic", "normal");
     doc.setFontSize(6);
