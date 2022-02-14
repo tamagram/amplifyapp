@@ -66,30 +66,36 @@ const Printer = () => {
   );
   return (
     <>
-      <Container className="my-5">
-        <div>
-          <Form.Group className="mb-3" as={Row} controlId="formPlaintextEmail">
-            <Form.Label column sm="3">
-              SKU
-            </Form.Label>
-            <Col sm="3">
-              <Form.Control
-                type="text"
-                value={sku}
-                onChange={(e) => setSku(e.target.value)}
-              />
-            </Col>
-            <Col sm="3">
-              <Button
-                variant="primary"
-                onClick={() => setIsRakuten(!isRakuten)}
-              >
-                {isRakuten ? "普通表示にする" : "Rakuten表示にする"}
-              </Button>
-            </Col>
-          </Form.Group>
-          {iframe}
-        </div>
+      <Container className="my-5 py-3 border rounded">
+        <Row>
+          <div>
+            <Form.Group
+              className="mb-3"
+              as={Row}
+              controlId="formPlaintextEmail"
+            >
+              <Form.Label column sm="3">
+                SKU
+              </Form.Label>
+              <Col sm="3">
+                <Form.Control
+                  type="text"
+                  value={sku}
+                  onChange={(e) => setSku(e.target.value)}
+                />
+              </Col>
+              <Col sm="3">
+                <Button
+                  variant="primary"
+                  onClick={() => setIsRakuten(!isRakuten)}
+                >
+                  {isRakuten ? "普通表示にする" : "Rakuten表示にする"}
+                </Button>
+              </Col>
+            </Form.Group>
+            {iframe}
+          </div>
+        </Row>
       </Container>
     </>
   );
