@@ -47,12 +47,14 @@ const colorCodeToString = (colorCode) => {
 const generateRakutenPdf = (product) => {
   const setFabricItem = (value, x, y) => {
     const [item, ratio] = value.replace(/ /g, "").split(/[:|：]/);
-    doc.setFont("GenShinGothic", "normal");
-    doc.setFontSize(6);
-    doc.text(item + " :", x, y);
-    doc.setFont("GenShinGothic", "bold");
-    doc.setFontSize(7);
-    doc.text(ratio, x + (item.length + 3) * 1.6, y);
+    if (item && ratio) {
+      doc.setFont("GenShinGothic", "normal");
+      doc.setFontSize(6);
+      doc.text(item + " :", x, y);
+      doc.setFont("GenShinGothic", "bold");
+      doc.setFontSize(7);
+      doc.text(ratio, x + (item.length + 3) * 1.6, y);
+    }
   };
 
   const generateSticker = (doc, x, y) => {
