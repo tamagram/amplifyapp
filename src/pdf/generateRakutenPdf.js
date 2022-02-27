@@ -44,7 +44,7 @@ const colorCodeToString = (colorCode) => {
   }
 };
 
-const generateRakutenPdf = (product) => {
+const generateRakutenPdf = (products) => {
   const setFabricItem = (value, x, y) => {
     const [item, ratio] = value.replace(/ /g, "").split(/[:|：]/);
     if (item && ratio) {
@@ -57,7 +57,7 @@ const generateRakutenPdf = (product) => {
     }
   };
 
-  const generateSticker = (doc, x, y) => {
+  const generateSticker = (product, doc, x, y) => {
     const offsetX = 3;
     const adjustedX = x + offsetX;
     doc.setFont("GenShinGothic", "bold");
@@ -171,19 +171,6 @@ const generateRakutenPdf = (product) => {
     doc.text("0467-33-1399", adjustedX + 20, y + 76.25, null, null, "center");
   };
 
-  const products = [
-    product,
-    product,
-    product,
-    product,
-    product,
-    product,
-    product,
-    product,
-    product,
-    product,
-  ];
-
   const doc = new jsPDF("landscape");
   doc.addFileToVFS("GenShinGothic-Bold.ttf", fontBold);
   doc.addFileToVFS("GenShinGothic-Medium.ttf", fontMedium);
@@ -240,34 +227,34 @@ const generateRakutenPdf = (product) => {
   products.forEach((product, index) => {
     switch (index) {
       case 0:
-        generateSticker(doc, 24, 23.75);
+        generateSticker(product, doc, 24, 23.75);
         break;
       case 1:
-        generateSticker(doc, 71, 23.75);
+        generateSticker(product, doc, 71, 23.75);
         break;
       case 2:
-        generateSticker(doc, 118, 23.75);
+        generateSticker(product, doc, 118, 23.75);
         break;
       case 3:
-        generateSticker(doc, 165, 23.75);
+        generateSticker(product, doc, 165, 23.75);
         break;
       case 4:
-        generateSticker(doc, 212, 23.75);
+        generateSticker(product, doc, 212, 23.75);
         break;
       case 5:
-        generateSticker(doc, 24, 107.75);
+        generateSticker(product, doc, 24, 107.75);
         break;
       case 6:
-        generateSticker(doc, 71, 107.75);
+        generateSticker(product, doc, 71, 107.75);
         break;
       case 7:
-        generateSticker(doc, 118, 107.75);
+        generateSticker(product, doc, 118, 107.75);
         break;
       case 8:
-        generateSticker(doc, 165, 107.75);
+        generateSticker(product, doc, 165, 107.75);
         break;
       case 9:
-        generateSticker(doc, 212, 107.75);
+        generateSticker(product, doc, 212, 107.75);
         break;
       default:
         break;

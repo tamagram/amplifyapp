@@ -27,22 +27,34 @@ const Printer = () => {
         },
       })
         .then((res) => {
-          const products = res.data.listProducts.items;
-          if (products.length > 0) {
+          const items = res.data.listProducts.items;
+          if (items.length > 0) {
             const product = {
-              sku: products[0].sku,
-              name: products[0].name,
-              size: products[0].size,
-              color: products[0].color,
-              price: products[0].price,
-              fabric: products[0].fabric,
-              country: products[0].country,
+              sku: items[0].sku,
+              name: items[0].name,
+              size: items[0].size,
+              color: items[0].color,
+              price: items[0].price,
+              fabric: items[0].fabric,
+              country: items[0].country,
             };
-            console.log(product);
+            const products = [
+              product,
+              product,
+              product,
+              product,
+              product,
+              product,
+              product,
+              product,
+              product,
+              product,
+            ];
+            console.log(products);
             if (isRakuten) {
-              setData(generateRakutenPdf(product));
+              setData(generateRakutenPdf(products));
             } else {
-              setData(generatePdf(product));
+              setData(generatePdf(products));
             }
           } else {
             console.log("No product found");
