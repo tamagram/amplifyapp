@@ -211,6 +211,7 @@ export const generatePdf = (products) => {
 
   // content
   products.forEach((product, index) => {
+    console.log(product);
     switch (index) {
       case 0:
         generateSticker(product, doc, 24, 23.75);

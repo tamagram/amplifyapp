@@ -7,65 +7,143 @@ import { generatePdf } from "../pdf/generatePdf";
 import generateRakutenPdf from "../pdf/generateRakutenPdf";
 
 const Printer = () => {
-  const [sku, setSku] = useState("0000000000-000");
+  const [skuList, setSkuList] = useState([
+    "0000000000-000",
+    "0000000000-000",
+    "0000000000-000",
+    "0000000000-000",
+    "0000000000-000",
+    "0000000000-000",
+    "0000000000-000",
+    "0000000000-000",
+    "0000000000-000",
+    "0000000000-000",
+  ]);
+
   const [data, setData] = useState(
     new jsPDF("landscape").output("datauristring")
   );
   const [isRakuten, setIsRakuten] = useState(false);
 
   useEffect(() => {
-    const fetchProductsBySku = (sku) => {
-      API.graphql({
-        query: listProductsQuery,
-        variables: {
-          filter: {
-            sku: {
-              eq: sku,
+    let isMounted = true;
+    console.log(skuList);
+    const fetchProductBySku = async (sku) => {
+      try {
+        const products = await API.graphql({
+          query: listProductsQuery,
+          variables: {
+            filter: {
+              sku: {
+                eq: sku,
+              },
             },
+            limit: 1000,
           },
-          limit: 1000,
-        },
-      })
-        .then((res) => {
-          const items = res.data.listProducts.items;
-          if (items.length > 0) {
-            const product = {
-              sku: items[0].sku,
-              name: items[0].name,
-              size: items[0].size,
-              color: items[0].color,
-              price: items[0].price,
-              fabric: items[0].fabric,
-              country: items[0].country,
-            };
-            const products = [
-              product,
-              product,
-              product,
-              product,
-              product,
-              product,
-              product,
-              product,
-              product,
-              product,
-            ];
-            console.log(products);
-            if (isRakuten) {
-              setData(generateRakutenPdf(products));
-            } else {
-              setData(generatePdf(products));
-            }
+        });
+        const items = products.data.listProducts.items;
+        console.log(items);
+        if (items.length > 0) {
+          const product = {
+            sku: items[0].sku,
+            name: items[0].name,
+            size: items[0].size,
+            color: items[0].color,
+            price: items[0].price,
+            fabric: items[0].fabric,
+            country: items[0].country,
+          };
+          return product;
+        } else {
+          return null;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    (async () => {
+      const products = await Promise.all(
+        skuList.map(async (sku, index) => {
+          const product = await fetchProductBySku(sku);
+          if (product) {
+            return product;
           } else {
-            console.log("No product found");
+            return {
+              sku: "0000000000-000",
+              name: "未設定",
+              size: "未設定",
+              color: "100",
+              price: 0,
+              fabric: "未設定",
+              country: "未設定",
+            };
           }
         })
-        .catch((err) => {
-          console.error(err);
-        });
+      );
+      console.log(products);
+      if (isMounted) {
+        setData(generatePdf(products));
+      }
+    })();
+    return () => {
+      isMounted = false;
     };
-    fetchProductsBySku(sku);
-  }, [sku, isRakuten]);
+  }, [skuList]);
+
+  // useEffect(() => {
+  //   const fetchProductsBySku = (sku) => {
+  //     API.graphql({
+  //       query: listProductsQuery,
+  //       variables: {
+  //         filter: {
+  //           sku: {
+  //             eq: sku,
+  //           },
+  //         },
+  //         limit: 1000,
+  //       },
+  //     })
+  //       .then((res) => {
+  //         const items = res.data.listProducts.items;
+  //         if (items.length > 0) {
+  //           const product = {
+  //             sku: items[0].sku,
+  //             name: items[0].name,
+  //             size: items[0].size,
+  //             color: items[0].color,
+  //             price: items[0].price,
+  //             fabric: items[0].fabric,
+  //             country: items[0].country,
+  //           };
+  //           const products = [
+  //             product,
+  //             product,
+  //             product,
+  //             product,
+  //             product,
+  //             product,
+  //             product,
+  //             product,
+  //             product,
+  //             product,
+  //           ];
+  //           console.log(products);
+  //           if (isRakuten) {
+  //             setData(generateRakutenPdf(products));
+  //           } else {
+  //             setData(generatePdf(products));
+  //           }
+  //         } else {
+  //           console.log("No product found");
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         console.error(err);
+  //       });
+  //   };
+  //   fetchProductsBySku(sku);
+  // }, [sku, isRakuten]);
 
   const iframe = (
     <iframe
@@ -87,24 +165,189 @@ const Printer = () => {
               controlId="formPlaintextEmail"
             >
               <Form.Label column sm="3">
-                SKU
+                SKU6
               </Form.Label>
               <Col sm="3">
                 <Form.Control
                   type="text"
-                  value={sku}
-                  onChange={(e) => setSku(e.target.value)}
+                  value={skuList[5]}
+                  onChange={(e) =>
+                    setSkuList([
+                      ...skuList.slice(0, 5),
+                      e.target.value,
+                      ...skuList.slice(6),
+                    ])
+                  }
                 />
               </Col>
+              <Form.Label column sm="3">
+                SKU1
+              </Form.Label>
               <Col sm="3">
-                <Button
-                  variant="primary"
-                  onClick={() => setIsRakuten(!isRakuten)}
-                >
-                  {isRakuten ? "普通表示にする" : "Rakuten表示にする"}
-                </Button>
+                <Form.Control
+                  type="text"
+                  value={skuList[0]}
+                  onChange={(e) =>
+                    setSkuList([e.target.value, ...skuList.slice(1)])
+                  }
+                />
               </Col>
             </Form.Group>
+            <Form.Group
+              className="mb-3"
+              as={Row}
+              controlId="formPlaintextEmail"
+            >
+              <Form.Label column sm="3">
+                SKU7
+              </Form.Label>
+              <Col sm="3">
+                <Form.Control
+                  type="text"
+                  value={skuList[6]}
+                  onChange={(e) =>
+                    setSkuList([
+                      ...skuList.slice(0, 6),
+                      e.target.value,
+                      ...skuList.slice(7),
+                    ])
+                  }
+                />
+              </Col>
+              <Form.Label column sm="3">
+                SKU2
+              </Form.Label>
+              <Col sm="3">
+                <Form.Control
+                  type="text"
+                  value={skuList[1]}
+                  onChange={(e) =>
+                    setSkuList([
+                      ...skuList.slice(0, 1),
+                      e.target.value,
+                      ...skuList.slice(2),
+                    ])
+                  }
+                />
+              </Col>
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
+              as={Row}
+              controlId="formPlaintextEmail"
+            >
+              <Form.Label column sm="3">
+                SKU8
+              </Form.Label>
+              <Col sm="3">
+                <Form.Control
+                  type="text"
+                  value={skuList[7]}
+                  onChange={(e) =>
+                    setSkuList([
+                      ...skuList.slice(0, 7),
+                      e.target.value,
+                      ...skuList.slice(8),
+                    ])
+                  }
+                />
+              </Col>
+              <Form.Label column sm="3">
+                SKU3
+              </Form.Label>
+              <Col sm="3">
+                <Form.Control
+                  type="text"
+                  value={skuList[2]}
+                  onChange={(e) =>
+                    setSkuList([
+                      ...skuList.slice(0, 2),
+                      e.target.value,
+                      ...skuList.slice(3),
+                    ])
+                  }
+                />
+              </Col>
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
+              as={Row}
+              controlId="formPlaintextEmail"
+            >
+              <Form.Label column sm="3">
+                SKU9
+              </Form.Label>
+              <Col sm="3">
+                <Form.Control
+                  type="text"
+                  value={skuList[8]}
+                  onChange={(e) =>
+                    setSkuList([
+                      ...skuList.slice(0, 8),
+                      e.target.value,
+                      ...skuList.slice(9),
+                    ])
+                  }
+                />
+              </Col>
+              <Form.Label column sm="3">
+                SKU4
+              </Form.Label>
+              <Col sm="3">
+                <Form.Control
+                  type="text"
+                  value={skuList[3]}
+                  onChange={(e) =>
+                    setSkuList([
+                      ...skuList.slice(0, 3),
+                      e.target.value,
+                      ...skuList.slice(4),
+                    ])
+                  }
+                />
+              </Col>
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
+              as={Row}
+              controlId="formPlaintextEmail"
+            >
+              <Form.Label column sm="3">
+                SKU10
+              </Form.Label>
+              <Col sm="3">
+                <Form.Control
+                  type="text"
+                  value={skuList[9]}
+                  onChange={(e) =>
+                    setSkuList([...skuList.slice(0, 9), e.target.value])
+                  }
+                />
+              </Col>
+              <Form.Label column sm="3">
+                SKU5
+              </Form.Label>
+              <Col sm="3">
+                <Form.Control
+                  type="text"
+                  value={skuList[4]}
+                  onChange={(e) =>
+                    setSkuList([
+                      ...skuList.slice(0, 4),
+                      e.target.value,
+                      ...skuList.slice(5),
+                    ])
+                  }
+                />
+              </Col>
+            </Form.Group>
+            <Button
+              className="mb-3"
+              variant="primary"
+              onClick={() => setIsRakuten(!isRakuten)}
+            >
+              {isRakuten ? "普通表示にする" : "Rakuten表示にする"}
+            </Button>
             {iframe}
           </div>
         </Row>
