@@ -83,67 +83,17 @@ const Printer = () => {
       );
       console.log(products);
       if (isMounted) {
-        setData(generatePdf(products));
+        if (isRakuten) {
+          setData(generateRakutenPdf(products));
+        } else {
+          setData(generatePdf(products));
+        }
       }
     })();
     return () => {
       isMounted = false;
     };
-  }, [skuList]);
-
-  // useEffect(() => {
-  //   const fetchProductsBySku = (sku) => {
-  //     API.graphql({
-  //       query: listProductsQuery,
-  //       variables: {
-  //         filter: {
-  //           sku: {
-  //             eq: sku,
-  //           },
-  //         },
-  //         limit: 1000,
-  //       },
-  //     })
-  //       .then((res) => {
-  //         const items = res.data.listProducts.items;
-  //         if (items.length > 0) {
-  //           const product = {
-  //             sku: items[0].sku,
-  //             name: items[0].name,
-  //             size: items[0].size,
-  //             color: items[0].color,
-  //             price: items[0].price,
-  //             fabric: items[0].fabric,
-  //             country: items[0].country,
-  //           };
-  //           const products = [
-  //             product,
-  //             product,
-  //             product,
-  //             product,
-  //             product,
-  //             product,
-  //             product,
-  //             product,
-  //             product,
-  //             product,
-  //           ];
-  //           console.log(products);
-  //           if (isRakuten) {
-  //             setData(generateRakutenPdf(products));
-  //           } else {
-  //             setData(generatePdf(products));
-  //           }
-  //         } else {
-  //           console.log("No product found");
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         console.error(err);
-  //       });
-  //   };
-  //   fetchProductsBySku(sku);
-  // }, [sku, isRakuten]);
+  }, [skuList, isRakuten]);
 
   const iframe = (
     <iframe
