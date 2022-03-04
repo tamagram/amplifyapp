@@ -27,7 +27,6 @@ const Printer = () => {
 
   useEffect(() => {
     let isMounted = true;
-    console.log(skuList);
     const fetchProductBySku = async (sku) => {
       try {
         const products = await API.graphql({
@@ -42,7 +41,6 @@ const Printer = () => {
           },
         });
         const items = products.data.listProducts.items;
-        console.log(items);
         if (items.length > 0) {
           const product = {
             sku: items[0].sku,
@@ -58,7 +56,7 @@ const Printer = () => {
           return null;
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
 
@@ -81,7 +79,6 @@ const Printer = () => {
           }
         })
       );
-      console.log(products);
       if (isMounted) {
         if (isRakuten) {
           setData(generateRakutenPdf(products));
