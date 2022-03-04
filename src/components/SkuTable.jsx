@@ -451,6 +451,7 @@ const SkuTable = () => {
                 <Button
                   size="lg"
                   variant="primary"
+                  disabled={true}
                   onClick={() => {
                     setShowCsv(true);
                     generateCsv();

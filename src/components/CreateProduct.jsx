@@ -564,6 +564,7 @@ const Editor = () => {
                 <Button
                   className="mt-2"
                   variant="success"
+                  disabled={true}
                   onClick={() => {
                     setShowImportCsv(true);
                   }}
