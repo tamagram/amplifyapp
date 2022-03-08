@@ -25,16 +25,17 @@ const Editor = () => {
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
-  const [size, setSize] = useState("");
   const [fabric, setFabric] = useState("");
   const [country, setCountry] = useState("");
-
+  
   const [brandCode, setBrandCode] = useState("01");
   const [years, setYears] = useState("21");
   const [season, setSeason] = useState("x");
   const [largeCategory, setLargeCategory] = useState("x");
   const [mediumCategory, setMediumCategory] = useState("xx");
-  const [smallCategory, setSmallCategory] = useState("xx");
+  const [smallCategory, setSmallCategory] = useState("xxx");
+  // -
+  const [size, setSize] = useState("x");
   // -
   const [colorCode, setColorCode] = useState("xxx");
 
@@ -51,6 +52,8 @@ const Editor = () => {
       mediumCategory +
       smallCategory +
       "-" +
+      size +
+      "-" +
       colorCode;
     setSku(newSku);
   }, [
@@ -61,12 +64,13 @@ const Editor = () => {
     largeCategory,
     mediumCategory,
     smallCategory,
+    size,
     colorCode,
   ]);
 
   const createProduct = () => {
     const validate = () => {
-      if (sku.length !== 14 || sku.match(/(x|選択)/)) {
+      if (sku.length !== 17 || sku.match(/(x|選択)/)) {
         alert("SKUが正しくありません。");
         return;
       }
@@ -424,6 +428,26 @@ const Editor = () => {
                   </Col>
                   <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
+                -
+                <FloatingLabel controlId="floatingSelect" label="サイズ">
+                  <Form.Select
+                    aria-label="Floating label select example"
+                    value={size}
+                    onChange={(e) => {
+                      setSize(e.target.value);
+                    }}
+                  >
+                    {/* サイズ番号　XS0 S1 M2 L3 XL4 F5 */}
+                    <option value="x">選択</option>
+                    <option value="0">XS : 0</option>
+                    <option value="1">S : 1</option>
+                    <option value="2">M : 2</option>
+                    <option value="3">L : 3</option>
+                    <option value="4">XL : 4</option>
+                    <option value="5">F : 5</option>
+                  </Form.Select>
+                </FloatingLabel>
+                -
                 <FloatingLabel controlId="floatingSelect" label="カラー番号">
                   <Form.Select
                     aria-label="Floating label select example"
@@ -472,7 +496,7 @@ const Editor = () => {
                   </Col>
                   <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group as={Row} controlId="validationCustom01">
+                {/* <Form.Group as={Row} controlId="validationCustom01">
                   <Form.Label column sm="5">
                     サイズ
                   </Form.Label>
@@ -487,7 +511,7 @@ const Editor = () => {
                     />
                   </Col>
                   <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                </Form.Group>
+                </Form.Group> */}
                 <Form.Group as={Row} controlId="validationCustom01">
                   <Form.Label column sm="5">
                     価格
