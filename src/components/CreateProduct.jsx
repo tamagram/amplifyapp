@@ -70,6 +70,7 @@ const Editor = () => {
 
   const createProduct = () => {
     const validate = () => {
+      console.log(sku);
       if (sku.length !== 17 || sku.match(/(x|選択)/)) {
         alert("SKUが正しくありません。");
         return;
@@ -99,6 +100,8 @@ const Editor = () => {
           alert("既に登録されているSKUです。");
           return;
         }
+        // TODO: 実際に表示されているSKUと登録時のSKUが違うので一致させる
+        console.log(sku);
         API.graphql({
           query: createProductMutation,
           variables: {
@@ -191,25 +194,25 @@ const Editor = () => {
       .then((value) => {
         if (value.data.listProducts.items.length === 0) {
           setSmallCategoryMessage(
-            "ほかのサイズが存在しないため、小カテゴリに01を設定しました。"
+            "ほかのサイズが存在しないため、小カテゴリに001を設定しました。"
           );
-          setSmallCategory("01");
+          setSmallCategory("001");
           return;
         }
-        let chSmallCategory = "00";
+        let chSmallCategory = "000";
         const smallCategories = value.data.listProducts.items.map((item) => {
           if (chSmallCategory < item.smallCategory)
             chSmallCategory = item.smallCategory;
           return item.smallCategory + "(" + item.size + ")";
         });
-        if (chSmallCategory === "99") {
+        if (chSmallCategory === "999") {
           setSmallCategoryMessage("これ以上小カテゴリを追加できません。");
           return;
         }
         let message = smallCategories.join(", ");
         message += "がすでに存在しています。\n";
         message += chSmallCategory + " +1 を設定しました。";
-        setSmallCategory(("0" + (parseInt(chSmallCategory) + 1)).slice(-2));
+        setSmallCategory(("0" + (parseInt(chSmallCategory) + 1)).slice(-3));
         setSmallCategoryMessage(message);
       })
       .catch((err) => {

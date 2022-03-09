@@ -23,6 +23,7 @@ const ProductRecord = (props) => {
   const { setReloadTable } = useContext(ReloadTableContext);
 
   const [id, _] = useState(product.id);
+  const [sku, setSku] = useState(product.sku);
   const [name, setName] = useState(product.name);
   const [price, setPrice] = useState(product.price);
   const [size, setSize] = useState(product.size);
@@ -76,6 +77,36 @@ const ProductRecord = (props) => {
   };
 
   useEffect(() => {
+    let newVersion = false;
+    const parsed = parseInt(size);
+    if (isNaN(parsed)) {
+      newVersion = true;
+    }
+    if (newVersion) {
+      setSku(
+        brandCode +
+        year +
+        season +
+        largeCategory +
+        mediumCategory +
+        smallCategory +
+        "-" +
+        color,
+      )
+    } else {
+      setSku(
+        brandCode +
+        year +
+        season +
+        largeCategory +
+        mediumCategory +
+        smallCategory +
+        "-" +
+        size +
+        "-" +
+        color,
+      )
+    }
     setProduct({
       id: id,
       name: name,
@@ -90,17 +121,10 @@ const ProductRecord = (props) => {
       largeCategory: largeCategory,
       mediumCategory: mediumCategory,
       smallCategory: smallCategory,
-      sku:
-        brandCode +
-        year +
-        season +
-        largeCategory +
-        mediumCategory +
-        smallCategory +
-        "-" +
-        color,
+      sku: sku,
     });
   }, [
+    sku,
     id,
     name,
     price,
