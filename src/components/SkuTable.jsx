@@ -268,26 +268,6 @@ const SkuTable = () => {
                   </Col>
                   <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group
-                  className="mb-3"
-                  as={Row}
-                  controlId="validationCustom01"
-                >
-                  <Form.Label column sm="5">
-                    サイズ
-                  </Form.Label>
-                  <Col>
-                    <Form.Control
-                      required
-                      type="string"
-                      value={size}
-                      onChange={(e) => {
-                        setSize(e.target.value);
-                      }}
-                    />
-                  </Col>
-                  <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                </Form.Group>
                 <Form.Group as={Row} controlId="validationCustom01">
                   <Form.Label column sm="5">
                     ブランドコード
@@ -404,6 +384,25 @@ const SkuTable = () => {
                   </Col>
                   <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
+                -
+                <FloatingLabel controlId="floatingSelect" label="サイズ">
+                  <Form.Select
+                    aria-label="Floating label select example"
+                    value={size}
+                    onChange={(e) => {
+                      setSize(e.target.value);
+                    }}
+                  >
+                    <option value="">選択</option>
+                    <option value="XS">XS</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="F">F</option>
+                  </Form.Select>
+                </FloatingLabel>
+                -
                 <FloatingLabel controlId="floatingSelect" label="カラー番号">
                   <Form.Select
                     aria-label="Floating label select example"
