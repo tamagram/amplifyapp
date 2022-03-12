@@ -15,6 +15,7 @@ import {
   Alert,
 } from "react-bootstrap";
 import { SkuContext, ReloadTableContext } from "../App";
+import sizeToCode from "../conversion/size";
 
 const Editor = () => {
   const { sku, setSku } = useContext(SkuContext);
@@ -52,7 +53,7 @@ const Editor = () => {
       mediumCategory +
       smallCategory +
       "-" +
-      size +
+      sizeToCode(size) +
       "-" +
       colorCode;
     setSku(newSku);
@@ -163,6 +164,7 @@ const Editor = () => {
       },
     })
       .then((value) => {
+        console.dir(value.data.listProducts.items);
         if (value.data.listProducts.items.length === 0) {
           setSmallCategoryMessage(
             "ほかのサイズが存在しないため、小カテゴリに001を設定しました。"
@@ -171,10 +173,9 @@ const Editor = () => {
           return;
         }
         let chSmallCategory = "000";
-        value.data.listProducts.items.map((item) => {
+        value.data.listProducts.items.forEach((item) => {
           if (chSmallCategory < item.smallCategory)
             chSmallCategory = item.smallCategory;
-          return item.smallCategory + "(" + item.size + ")";
         });
         if (chSmallCategory === "999") {
           setSmallCategoryMessage("これ以上小カテゴリを追加できません。");
@@ -415,12 +416,12 @@ const Editor = () => {
                   >
                     {/* サイズ番号　XS0 S1 M2 L3 XL4 F5 */}
                     <option value="x">選択</option>
-                    <option value="0">XS : 0</option>
-                    <option value="1">S : 1</option>
-                    <option value="2">M : 2</option>
-                    <option value="3">L : 3</option>
-                    <option value="4">XL : 4</option>
-                    <option value="5">F : 5</option>
+                    <option value="XS">XS : 0</option>
+                    <option value="S">S : 1</option>
+                    <option value="M">M : 2</option>
+                    <option value="L">L : 3</option>
+                    <option value="XL">XL : 4</option>
+                    <option value="F">F : 5</option>
                   </Form.Select>
                 </FloatingLabel>
                 -
