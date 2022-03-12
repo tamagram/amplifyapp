@@ -51,8 +51,7 @@ const ProductRecord = (props) => {
         alert("更新しました");
       })
       .catch((error) => {
-        console.log(error);
-        console.dir(product);
+        console.error(error);
         alert("更新に失敗しました");
       });
   };
@@ -72,7 +71,7 @@ const ProductRecord = (props) => {
         setReloadTable(true);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         alert("削除に失敗しました");
       });
   };

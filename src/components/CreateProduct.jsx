@@ -177,7 +177,6 @@ const Editor = () => {
         }
         let chSmallCategory = "000";
         value.data.listProducts.items.forEach((item) => {
-          console.log("assign smallCategory")
           if(item.sku.length !== 17) return;
           console.dir(item);
           if (chSmallCategory < item.smallCategory)
@@ -192,7 +191,6 @@ const Editor = () => {
           setSmallCategoryMessage("これ以上小カテゴリを追加できません。");
           return;
         }
-        console.log(chSmallCategory);
         const formattedChSmallCategory = (
           "00" +
           (parseInt(chSmallCategory) + 1)
