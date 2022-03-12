@@ -74,18 +74,19 @@ const Editor = () => {
       console.log(sku);
       if (sku.length !== 17 || sku.match(/(x|選択)/)) {
         alert("SKUが正しくありません。");
-        return;
+        return false;
       }
       if (!name) {
         alert("商品名が未入力です。");
-        return;
+        return false;
       }
       if (price === "") {
         alert("価格が未入力です。");
-        return;
+        return false;
       }
+      return true;
     };
-    validate();
+    if (!validate()) return;
     API.graphql({
       query: listProductsQuery,
       variables: {
@@ -181,8 +182,11 @@ const Editor = () => {
           setSmallCategoryMessage("これ以上小カテゴリを追加できません。");
           return;
         }
-        console.log(chSmallCategory)
-        const formattedChSmallCategory = ("0" + (parseInt(chSmallCategory) + 1)).slice(-3);
+        console.log(chSmallCategory);
+        const formattedChSmallCategory = (
+          "0" +
+          (parseInt(chSmallCategory) + 1)
+        ).slice(-3);
         setSmallCategory(formattedChSmallCategory);
         let message = chSmallCategory;
         message += "がすでに存在しています。\n";

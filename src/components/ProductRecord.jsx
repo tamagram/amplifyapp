@@ -16,6 +16,7 @@ import {
   deleteProduct as deleteProductMutation,
 } from "../graphql/mutations";
 import { ReloadTableContext } from "../App";
+import sizeToCode from "../conversion/size"
 
 const ProductRecord = (props) => {
   const [product, setProduct] = useState(props.product);
@@ -78,8 +79,7 @@ const ProductRecord = (props) => {
 
   useEffect(() => {
     let newVersion = false;
-    const parsed = parseInt(size);
-    if (isNaN(parsed)) {
+    if (sku.length === 17) {
       newVersion = true;
     }
     if (newVersion) {
@@ -91,6 +91,8 @@ const ProductRecord = (props) => {
         mediumCategory +
         smallCategory +
         "-" +
+        sizeToCode(size) +
+        "-" +
         color,
       )
     } else {
@@ -101,8 +103,6 @@ const ProductRecord = (props) => {
         largeCategory +
         mediumCategory +
         smallCategory +
-        "-" +
-        size +
         "-" +
         color,
       )
@@ -402,12 +402,12 @@ const ProductRecord = (props) => {
                   >
                     {/* サイズ番号　XS0 S1 M2 L3 XL4 F5 */}
                     <option value="x">選択</option>
-                    <option value="0">XS : 0</option>
-                    <option value="1">S : 1</option>
-                    <option value="2">M : 2</option>
-                    <option value="3">L : 3</option>
-                    <option value="4">XL : 4</option>
-                    <option value="5">F : 5</option>
+                    <option value="XS">XS : 0</option>
+                    <option value="S">S : 1</option>
+                    <option value="M">M : 2</option>
+                    <option value="L">L : 3</option>
+                    <option value="XL">XL : 4</option>
+                    <option value="F">F : 5</option>
                   </Form.Select>
                   </FloatingLabel>
                   <Form.Group as={Row} controlId="validationCustom01">
