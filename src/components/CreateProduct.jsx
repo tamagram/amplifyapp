@@ -143,14 +143,15 @@ const Editor = () => {
     const validate = () => {
       if (years === "") {
         setSmallCategoryMessage("年数が未入力です。");
-        return;
+        return false;
       }
       if (season === "x") {
         setSmallCategoryMessage("シーズンが未入力です。");
-        return;
+        return false;
       }
+      return true;
     };
-    validate();
+    if (!validate()) return;
     API.graphql({
       query: listProductsQuery,
       variables: {
@@ -162,6 +163,7 @@ const Editor = () => {
             eq: years,
           },
         },
+        limit: 1000,
       },
     })
       .then((value) => {
@@ -175,16 +177,24 @@ const Editor = () => {
         }
         let chSmallCategory = "000";
         value.data.listProducts.items.forEach((item) => {
+          console.log("assign smallCategory")
+          if(item.sku.length !== 17) return;
+          console.dir(item);
           if (chSmallCategory < item.smallCategory)
             chSmallCategory = item.smallCategory;
         });
+        if (chSmallCategory === "000") {
+          setSmallCategoryMessage("シーズンと年数に一致する小カテゴリが存在しないため、小カテゴリに001を設定しました。");
+          setSmallCategory("001");
+          return;
+        }
         if (chSmallCategory === "999") {
           setSmallCategoryMessage("これ以上小カテゴリを追加できません。");
           return;
         }
         console.log(chSmallCategory);
         const formattedChSmallCategory = (
-          "0" +
+          "00" +
           (parseInt(chSmallCategory) + 1)
         ).slice(-3);
         setSmallCategory(formattedChSmallCategory);
