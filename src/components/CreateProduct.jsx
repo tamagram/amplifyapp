@@ -27,7 +27,7 @@ const Editor = () => {
   const [price, setPrice] = useState(0);
   const [fabric, setFabric] = useState("");
   const [country, setCountry] = useState("");
-  
+
   const [brandCode, setBrandCode] = useState("01");
   const [years, setYears] = useState("21");
   const [season, setSeason] = useState("x");
@@ -100,7 +100,6 @@ const Editor = () => {
           alert("既に登録されているSKUです。");
           return;
         }
-        // TODO: 実際に表示されているSKUと登録時のSKUが違うので一致させる
         console.log(sku);
         API.graphql({
           query: createProductMutation,
@@ -140,10 +139,6 @@ const Editor = () => {
 
   const assignSmallCategory = async () => {
     const validate = () => {
-      if (brandCode === "") {
-        setSmallCategoryMessage("ブランドコードが未入力です。");
-        return;
-      }
       if (years === "") {
         setSmallCategoryMessage("年数が未入力です。");
         return;
@@ -152,41 +147,17 @@ const Editor = () => {
         setSmallCategoryMessage("シーズンが未入力です。");
         return;
       }
-      if (largeCategory === "x") {
-        setSmallCategoryMessage("大カテゴリが未入力です。");
-        return;
-      }
-      if (mediumCategory === "xx") {
-        setSmallCategoryMessage("中カテゴリが未入力です。");
-        return;
-      }
-      if (colorCode === "xxx") {
-        setSmallCategoryMessage("カラー番号が未入力です。");
-        return;
-      }
     };
     validate();
     API.graphql({
       query: listProductsQuery,
       variables: {
         filter: {
-          brandCode: {
-            eq: brandCode,
-          },
-          year: {
-            eq: years,
-          },
           season: {
             eq: season,
           },
-          largeCategory: {
-            eq: largeCategory,
-          },
-          mediumCategory: {
-            eq: mediumCategory,
-          },
-          color: {
-            eq: colorCode,
+          year: {
+            eq: years,
           },
         },
       },
@@ -200,7 +171,7 @@ const Editor = () => {
           return;
         }
         let chSmallCategory = "000";
-        const smallCategories = value.data.listProducts.items.map((item) => {
+        value.data.listProducts.items.map((item) => {
           if (chSmallCategory < item.smallCategory)
             chSmallCategory = item.smallCategory;
           return item.smallCategory + "(" + item.size + ")";
@@ -209,10 +180,12 @@ const Editor = () => {
           setSmallCategoryMessage("これ以上小カテゴリを追加できません。");
           return;
         }
-        let message = smallCategories.join(", ");
+        console.log(chSmallCategory)
+        const formattedChSmallCategory = ("0" + (parseInt(chSmallCategory) + 1)).slice(-3);
+        setSmallCategory(formattedChSmallCategory);
+        let message = chSmallCategory;
         message += "がすでに存在しています。\n";
         message += chSmallCategory + " +1 を設定しました。";
-        setSmallCategory(("0" + (parseInt(chSmallCategory) + 1)).slice(-3));
         setSmallCategoryMessage(message);
       })
       .catch((err) => {
