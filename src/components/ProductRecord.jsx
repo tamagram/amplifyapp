@@ -78,7 +78,7 @@ const ProductRecord = (props) => {
 
   useEffect(() => {
     let newVersion = false;
-    if (sku.length === 17) {
+    if (smallCategory.length === 3) {
       newVersion = true;
     }
     if (newVersion) {
