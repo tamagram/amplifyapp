@@ -16,7 +16,7 @@ import {
   deleteProduct as deleteProductMutation,
 } from "../graphql/mutations";
 import { ReloadTableContext } from "../App";
-import sizeToCode from "../conversion/size"
+import sizeToCode from "../conversion/size";
 
 const ProductRecord = (props) => {
   const [product, setProduct] = useState(props.product);
@@ -84,27 +84,27 @@ const ProductRecord = (props) => {
     if (newVersion) {
       setSku(
         brandCode +
-        year +
-        season +
-        largeCategory +
-        mediumCategory +
-        smallCategory +
-        "-" +
-        sizeToCode(size) +
-        "-" +
-        color,
-      )
+          year +
+          season +
+          largeCategory +
+          mediumCategory +
+          smallCategory +
+          "-" +
+          sizeToCode(size) +
+          "-" +
+          color
+      );
     } else {
       setSku(
         brandCode +
-        year +
-        season +
-        largeCategory +
-        mediumCategory +
-        smallCategory +
-        "-" +
-        color,
-      )
+          year +
+          season +
+          largeCategory +
+          mediumCategory +
+          smallCategory +
+          "-" +
+          color
+      );
     }
     setProduct({
       id: id,
@@ -290,6 +290,26 @@ const ProductRecord = (props) => {
                       </Col>
                       <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>
+                    -
+                    <FloatingLabel controlId="floatingSelect" label="サイズ">
+                      <Form.Select
+                        aria-label="Floating label select example"
+                        value={size}
+                        onChange={(e) => {
+                          setSize(e.target.value);
+                        }}
+                      >
+                        {/* サイズ番号　XS0 S1 M2 L3 XL4 F5 */}
+                        <option value="x">選択</option>
+                        <option value="XS">XS : 0</option>
+                        <option value="S">S : 1</option>
+                        <option value="M">M : 2</option>
+                        <option value="L">L : 3</option>
+                        <option value="XL">XL : 4</option>
+                        <option value="F">F : 5</option>
+                      </Form.Select>
+                    </FloatingLabel>
+                    -
                     <FloatingLabel
                       controlId="floatingSelect"
                       label="カラー番号"
@@ -386,40 +406,6 @@ const ProductRecord = (props) => {
                         value={country}
                         onChange={(e) => {
                           setCountry(e.target.value);
-                        }}
-                      />
-                    </Col>
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                  </Form.Group>
-                  <FloatingLabel controlId="floatingSelect" label="サイズ">
-                  <Form.Select
-                    aria-label="Floating label select example"
-                    value={size}
-                    onChange={(e) => {
-                      setSize(e.target.value);
-                    }}
-                  >
-                    {/* サイズ番号　XS0 S1 M2 L3 XL4 F5 */}
-                    <option value="x">選択</option>
-                    <option value="XS">XS : 0</option>
-                    <option value="S">S : 1</option>
-                    <option value="M">M : 2</option>
-                    <option value="L">L : 3</option>
-                    <option value="XL">XL : 4</option>
-                    <option value="F">F : 5</option>
-                  </Form.Select>
-                  </FloatingLabel>
-                  <Form.Group as={Row} controlId="validationCustom01">
-                    <Form.Label column sm="5">
-                      サイズ
-                    </Form.Label>
-                    <Col>
-                      <Form.Control
-                        required
-                        type="text"
-                        value={product.size}
-                        onChange={(e) => {
-                          setSize(e.target.value);
                         }}
                       />
                     </Col>
