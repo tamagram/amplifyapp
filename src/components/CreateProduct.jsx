@@ -456,6 +456,7 @@ const Editor = () => {
                     <option value="600">GRN : 600</option>
                     <option value="700">YLW : 700</option>
                     <option value="800">RED : 800</option>
+                    <option value="850">ORG : 850</option>
                     <option value="900">BLU : 900</option>
                     <option value="050">PPL : 050</option>
                     <option value="111">GLD : 111</option>
