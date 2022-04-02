@@ -25,6 +25,21 @@ const Printer = () => {
   );
   const [isRakuten, setIsRakuten] = useState(false);
 
+  const resetSkuList = () => {
+    setSkuList([
+      "0000000000-000",
+      "0000000000-000",
+      "0000000000-000",
+      "0000000000-000",
+      "0000000000-000",
+      "0000000000-000",
+      "0000000000-000",
+      "0000000000-000",
+      "0000000000-000",
+      "0000000000-000",
+    ]);
+  };
+
   useEffect(() => {
     let isMounted = true;
     const fetchProductBySku = async (sku) => {
@@ -289,11 +304,18 @@ const Printer = () => {
               </Col>
             </Form.Group>
             <Button
-              className="mb-3"
+              className="mb-3 mx-2"
               variant="primary"
               onClick={() => setIsRakuten(!isRakuten)}
             >
               {isRakuten ? "普通表示にする" : "Rakuten表示にする"}
+            </Button>
+            <Button
+              className="mb-3 mx-2"
+              variant="secondary"
+              onClick={() => resetSkuList()}
+            >
+              クリア
             </Button>
             {iframe}
           </div>
