@@ -68,13 +68,13 @@ const Printer = () => {
             return product;
           } else {
             return {
-              sku: "0000000000-000",
-              name: "未設定",
-              size: "未設定",
-              color: "100",
+              sku: "",
+              name: "",
+              size: "",
+              color: "",
               price: 0,
-              fabric: "未設定",
-              country: "未設定",
+              fabric: "",
+              country: "　　　　　　　　",
             };
           }
         })

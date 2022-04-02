@@ -103,7 +103,7 @@ const generateRakutenPdf = (products) => {
             Math.trunc(product.price * 1.1)
               .toString()
               .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-        : "未設定",
+        : "",
       adjustedX + 20,
       y + 35.25,
       null,
@@ -117,7 +117,7 @@ const generateRakutenPdf = (products) => {
         ? "( 本体価格 ￥" +
             product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +
             " )"
-        : "未設定",
+        : "",
       adjustedX + 20,
       y + 38.25,
       null,

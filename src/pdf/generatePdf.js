@@ -61,7 +61,7 @@ export const generatePdf = (products) => {
       product.price
         ? "￥" +
             product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-        : "未設定",
+        : "",
       adjustedX + 20,
       y + 35.25,
       null,

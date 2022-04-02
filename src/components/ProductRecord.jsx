@@ -147,9 +147,9 @@ const ProductRecord = (props) => {
         {product.price
           ? "￥" +
             product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-          : "未設定"}
+          : ""}
       </td>
-      <td>{product.size || "未設定"}</td>
+      <td>{product.size || ""}</td>
       <td>{product.sku}</td>
       <td>
         <Button
