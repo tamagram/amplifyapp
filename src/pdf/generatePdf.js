@@ -18,6 +18,9 @@ export const generatePdf = (products) => {
   };
 
   const generateSticker = (product, doc, x, y) => {
+    if (product === null) {
+      return;
+    }
     const offsetX = 3;
     const adjustedX = x + offsetX;
     doc.setFont("GenShinGothic", "bold");
@@ -59,8 +62,7 @@ export const generatePdf = (products) => {
     doc.setFontSize(10);
     doc.text(
       product.price
-        ? "￥" +
-            product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        ? "￥" + product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         : "",
       adjustedX + 20,
       y + 35.25,

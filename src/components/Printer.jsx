@@ -82,15 +82,7 @@ const Printer = () => {
           if (product) {
             return product;
           } else {
-            return {
-              sku: "",
-              name: "",
-              size: "",
-              color: "",
-              price: 0,
-              fabric: "",
-              country: "　　　　　　　　",
-            };
+            return null
           }
         })
       );
@@ -98,6 +90,7 @@ const Printer = () => {
         if (isRakuten) {
           setData(generateRakutenPdf(products));
         } else {
+          console.log(products);
           setData(generatePdf(products));
         }
       }
