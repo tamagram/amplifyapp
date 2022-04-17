@@ -427,6 +427,7 @@ const Editor = () => {
                     }}
                   >
                     {/* サイズ番号　XS0 S1 M2 L3 XL4 F5 */}
+                    <option>◆アパレル◆</option>
                     <option value="x">選択</option>
                     <option value="XS">XS : 0</option>
                     <option value="S">S : 1</option>
@@ -434,6 +435,35 @@ const Editor = () => {
                     <option value="L">L : 3</option>
                     <option value="XL">XL : 4</option>
                     <option value="F">F : 5</option>
+                    <option>◆ジュエリー◆</option>
+                    <option value="x">選択</option>
+                    <option value="15号">15号 : 6</option>
+                    <option value="16号">16号 : 7</option>
+                    <option value="17号">17号 : 8</option>
+                    <option value="18号">18号 : 9</option>
+                    <option value="19号">19号 : 10</option>
+                    <option value="20号">20号 : 11</option>
+                    <option value="21号">21号 : 12</option>
+                    <option value="22号">16号 : 13</option>
+                
+                    <option>◆シューズ◆</option>
+                    <option value="x">選択</option>
+                    <option value="23.0cm">23.0cm : 14</option>
+                    <option value="23.5cm">23.5cm : 15</option>
+                    <option value="24.0cm">24.0cm : 16</option>
+                    <option value="24.5cm">24.5cm : 17</option>
+                    <option value="25.0cm">25.0cm : 18</option>
+                    <option value="25.5cm">25.5cm : 19</option>
+                    <option value="26.0cm">26.0cm : 20</option>
+                    <option value="26.5cm">26.5cm : 21</option>
+                    <option value="27.0cm">27.0cm : 22</option>
+                    <option value="27.5cm">27.5cm : 23</option>
+                    <option value="28.0cm">28.0cm : 24</option>
+                    <option value="28.5cm">28.5cm : 25</option>
+                    <option value="29.0cm">29.0cm : 26</option>
+                    
+
+
                   </Form.Select>
                 </FloatingLabel>
                 -
