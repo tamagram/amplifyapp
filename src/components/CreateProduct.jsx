@@ -444,7 +444,7 @@ const Editor = () => {
                     <option value="19号">19号 : 10</option>
                     <option value="20号">20号 : 11</option>
                     <option value="21号">21号 : 12</option>
-                    <option value="22号">16号 : 13</option>
+                    <option value="22号">22号 : 13</option>
                     
                 
                     <option>◆シューズ◆</option>
@@ -479,6 +479,7 @@ const Editor = () => {
                   >
                     <option value="xxx">選択</option>
                     <option value="100">WHT : 100</option>
+                    <option value="150">IVR : 150</option>
                     <option value="001">BLK : 001</option>
                     <option value="200">NVY : 200</option>
                     <option value="300">BGE : 300 (CREAM)</option>
