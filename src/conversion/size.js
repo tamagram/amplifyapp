@@ -59,7 +59,8 @@ const sizeToCode = (size) => {
       return "25";
     case "29.0cm":
       return "26";
+    case "29.5cm":
+      return "27";
   }
 };
-
 export default sizeToCode;
