@@ -72,7 +72,7 @@ const Editor = () => {
   const createProduct = () => {
     const validate = () => {
       console.log(sku);
-      if (sku.length !== 17 || sku.match(/(x|選択)/)) {
+      if (sku.match(/(x|選択)/)) {
         alert("SKUが正しくありません。");
         return false;
       }
@@ -177,7 +177,7 @@ const Editor = () => {
         }
         let chSmallCategory = "000";
         value.data.listProducts.items.forEach((item) => {
-          if(item.sku.length !== 17) return;
+          if (item.sku.length !== 17) return;
           console.dir(item);
           if (chSmallCategory < item.smallCategory)
             chSmallCategory = item.smallCategory;
@@ -445,8 +445,8 @@ const Editor = () => {
                     <option value="20号">20号 : 11</option>
                     <option value="21号">21号 : 12</option>
                     <option value="22号">22号 : 13</option>
-                    
-                
+
+
                     <option>◆シューズ◆</option>
                     <option value="x">選択</option>
                     <option value="23.0cm">23.0cm : 14</option>
@@ -463,7 +463,7 @@ const Editor = () => {
                     <option value="28.5cm">28.5cm : 25</option>
                     <option value="29.0cm">29.0cm : 26</option>
                     <option value="29.5cm">29.5cm : 27</option>
-                    
+
 
 
                   </Form.Select>
